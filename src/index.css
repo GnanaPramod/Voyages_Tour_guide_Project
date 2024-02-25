@@ -107,3 +107,42 @@ code {
   font-weight: 900;
   color:blue;
 }
+#searchBar{
+  color:white;
+  position:absolute;
+  top:35px;
+  font-size:20px;
+  left:500px;
+  border-radius: 50px;
+  width:250px;
+}
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  position: relative; /* Make sure the container is positioned relatively */
+}
+
+.top-image,
+.bottom-image {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+img {
+  width: 100%; /* Fix the width of the images */
+  height: 100%; /* Maintain aspect ratio */
+}
+
+.dragging-column {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 2px; /* Height of the dragging column */
+  background-color: rgba(0, 0, 0, 0.5); /* Color of the dragging column */
+  z-index: 999; /* Ensure the dragging column is above the images */
+  cursor: ns-resize; /* Change cursor to indicate resizing */
+}
