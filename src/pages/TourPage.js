@@ -1,6 +1,9 @@
 import React from 'react';
-
+import DayNight from '../pages/TourPageCompenent/DayNight.jsx';
+import '../pages/TourPage.css';
 function TourPage(){
-    return <div>Welcome to Tour Page</div>;
+    return (
+        <DayNight/>
+    );
 }
 export default TourPage;

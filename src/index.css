@@ -31,7 +31,7 @@ code {
 }
 #home{
   color:white;
-  position:absolute;
+  position:relative;
   top:35px;
   font-size: 20px;
   right:700px;
