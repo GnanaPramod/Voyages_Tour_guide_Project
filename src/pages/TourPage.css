@@ -25,4 +25,44 @@
     left: 50%;
     transform: translateX(-50%);
   }
+  .h1{
+    position:absolute;
+    left:550px;
+    color:white;
+    background-color: aquamarine;
+  }
+  #heading{
+    position:absolute;
+    left:460px;
+    background-color: blueviolet;
+    width:610px;
+    height:92px;
+    color:white;
+    border-radius: 10px;
+    font-size: 50px;
+    font-weight: bolder;
+    padding:15px;
+  }
+  #usr-req{
+    position:absolute;
+    left:460px;
+    background-color:wheat;
+    width:610px;
+    padding:50px;
+    border-radius: 10px;
+    
+  }
+  #usrid{
+    position:relative;
+    width:200px;
+  }
+  #backimg{
+    position:absolute;
+    width:400px;
+    height:400px;
+    left:20px;
+    border-radius: 190px;
+   
+    
+  }
   

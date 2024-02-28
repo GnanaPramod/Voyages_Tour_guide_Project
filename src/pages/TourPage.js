@@ -1,9 +1,10 @@
 import React from 'react';
-import DayNight from '../pages/TourPageCompenent/DayNight.jsx';
-import '../pages/TourPage.css';
+import UserReq from '../pages/TourPageCompenent/UserReq.jsx';
+import './TourPage.css';
+
 function TourPage(){
     return (
-        <DayNight/>
+        <UserReq/>
     );
 }
 export default TourPage;
