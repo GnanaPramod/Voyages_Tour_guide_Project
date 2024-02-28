@@ -6,6 +6,9 @@ import { RouterProvider, createBrowserRouter} from "react-router-dom";
 import About from "../src/pages/About.js";
 import Contact from "../src/pages/Contact.js";
 import TourPage from "../src/pages/TourPage.js";
+import SignUp from './pages/SignUp.js';
+import Success from '../src/pages/Success.js';
+import Manager from '../src/pages/Manager.js';
 const router = createBrowserRouter([
    {
       path:"/",
@@ -22,6 +25,18 @@ const router = createBrowserRouter([
    {
       path:"/tourpage",
       element: <TourPage/>
+   },
+   {
+      path:"/signup",
+      element:<SignUp/>
+   },
+   {
+      path:"/tourpage/success",
+      element:<Success/>
+   },
+   {
+      path:"/manager",
+      element:<Manager/>
    }
 ]);
 const root = ReactDOM.createRoot(document.getElementById('root'));
