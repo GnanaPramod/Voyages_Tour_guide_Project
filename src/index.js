@@ -9,6 +9,15 @@ import TourPage from "../src/pages/TourPage.js";
 import SignUp from './pages/SignUp.js';
 import Success from '../src/pages/Success.js';
 import Manager from '../src/pages/Manager.js';
+import SigCom from '../src/pages/SigCom.js';
+import UsrSignUp from './pages/SignUpPages/UsrSignUp.js';
+import MngrSignUp from './pages/SignUpPages/MngrSignUp.js';
+import GuideSignUp from './pages/SignUpPages/GuideSignUp.js';
+import SignInCom from './pages/SignInCom.js';
+import MgrSignIn from './pages/SignInPages/MgrSignIn.js';
+import UsrSignIn from './pages/SignInPages/UsrSignIn.js';
+import GuideSignIn from './pages/SignInPages/GuideSignIn.js';
+import UserIntf from './pages/UserIntf.js';
 const router = createBrowserRouter([
    {
       path:"/",
@@ -37,6 +46,43 @@ const router = createBrowserRouter([
    {
       path:"/manager",
       element:<Manager/>
+   },
+   {
+      path:"/signupcom",
+      element:<SigCom/>
+   },
+   {
+      path:"/signupcom/usrsignup",
+      element:<UsrSignUp/>
+   },
+   {
+      path:"/signupcom/mngrsignup",
+      element:<MngrSignUp/>
+   },
+   {
+      path:"/signupcom/guidesignup",
+      element:<GuideSignUp/>
+   },
+   {
+      path:"/signincom",
+      element:<SignInCom/>
+
+   },
+   {
+      path:"/signincom/usrsignin",
+      element:<UsrSignIn/>
+   },
+   {
+      path:"/signincom/mgrsignin",
+      element:<MgrSignIn/>
+   },
+   {
+      path:"/signincom/guidesignin",
+      element:<GuideSignIn/>
+   },
+   {
+      path:"/userintf",
+      element:<UserIntf/>
    }
 ]);
 const root = ReactDOM.createRoot(document.getElementById('root'));

@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import './LoginPage.css'; // Import CSS file for styling
+import '../SignInPages/LoginPage.css'; // Import CSS file for styling
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-function LoginPage() {
+function GuideSig() {
   
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -26,9 +25,9 @@ function LoginPage() {
     e.preventDefault();
     try {
       
-      const response = axios.post('/signincom/usrsignin', formData);
+      const response = axios.post('/signup', formData);
       console.log(response.data);
-      navigate('/userintf');
+      navigate('/tourpage/success');
 
       // Add any further actions you want to perform after successful registration
     } catch (error) {
@@ -39,7 +38,7 @@ function LoginPage() {
 
   return (
     <div className="login-container">
-      <h1>Login Page</h1>
+      <h1>Guide Sign Up Page</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Username</label>
@@ -84,9 +83,9 @@ function LoginPage() {
         
         <button type="submit" className="submit-button">Login</button>
       </form>
-      <Link to = "/userintf">User interface </Link>
     </div>
   );
 }
 
-export default LoginPage;
+export default GuideSig;
+
