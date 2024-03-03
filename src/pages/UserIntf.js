@@ -1,7 +1,10 @@
 import React from 'react';
+import Search from './UserCom/Search.jsx';
 function UserIntf(){
     return(
-        <div>User Interface</div>
+        <div>
+            <Search/>
+        </div>
     );
 }
 export default UserIntf;
