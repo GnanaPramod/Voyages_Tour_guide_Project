@@ -1,7 +1,8 @@
 import React from 'react';
+import SignInMgr from './SignInMgr.jsx';
 function MgrSignIn(){
     return(
-        <div>hello manager</div>
+        <SignInMgr/>
     );
 }
 export default MgrSignIn;

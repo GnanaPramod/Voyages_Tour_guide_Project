@@ -18,6 +18,9 @@ import MgrSignIn from './pages/SignInPages/MgrSignIn.js';
 import UsrSignIn from './pages/SignInPages/UsrSignIn.js';
 import GuideSignIn from './pages/SignInPages/GuideSignIn.js';
 import UserIntf from './pages/UserIntf.js';
+import UsrResetPwd from './pages/PasswordReset/UsrResetPwd.js';
+import GuideResetPwd from './pages/PasswordReset/GuideResetPwd.js';
+import MgrResetPwd from './pages/PasswordReset/MgrResetPwd.js';
 const router = createBrowserRouter([
    {
       path:"/",
@@ -83,6 +86,18 @@ const router = createBrowserRouter([
    {
       path:"/userintf",
       element:<UserIntf/>
+   },
+   {
+      path:"/signincom/pwdresetusr",
+      element:<UsrResetPwd/>
+   },
+   {
+      path:"/signincom/pwdresetmgr",
+      element:<MgrResetPwd/>
+   },
+   {
+      path:"/signincom/pwdresetguide",
+      element:<GuideResetPwd/>
    }
 ]);
 const root = ReactDOM.createRoot(document.getElementById('root'));
