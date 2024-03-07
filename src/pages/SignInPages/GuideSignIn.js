@@ -1,7 +1,8 @@
 import React from 'react';
+import SignInGuide from './SignInGuide.jsx';
 function GuideSignIn(){
     return(
-        <div>Hello</div>
+        <SignInGuide/>
     );
 }
 export default GuideSignIn;

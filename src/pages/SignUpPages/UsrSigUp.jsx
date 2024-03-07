@@ -1,91 +1,86 @@
+
 import React, { useState } from 'react';
-import '../SignInPages/LoginPage.css'; // Import CSS file for styling
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 function UsrSigUp() {
-  
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: '',
-    userpwd: '',
     email: '',
-    usrphno: '',
-    
+    password: '',
+    name: '',
+    profilePicture: null
   });
-
+  const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const handleSignInClick = () => {
+    navigate("/signincom/usrsignin");
+  }
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
+    setFormData({
+      ...formData,
+      [name]: value
+    });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    try {
-      
-      const response = axios.post('/signup', formData);
-      console.log(response.data);
-      navigate('/tourpage/success');
+  const handleFileChange = (e) => {
+    setFormData({
+      ...formData,
+      profilePicture: e.target.files[0]
+    });
+  };
 
-      // Add any further actions you want to perform after successful registration
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setSuccessMessage('');
+
+    // Basic validation
+    if (!formData.username || !formData.email || !formData.password) {
+      setError('All fields are required');
+      return;
+    }
+
+    const formDataToSend = new FormData();
+    formDataToSend.append('username', formData.username);
+    formDataToSend.append('email', formData.email);
+    formDataToSend.append('password', formData.password);
+    formDataToSend.append('name', formData.name);
+    formDataToSend.append('profilePicture', formData.profilePicture);
+
+    try {
+      const response = await axios.post('http://localhost:5000/signup', formDataToSend, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      setSuccessMessage(response.data.message);
+      //navigate('/postlist');
     } catch (error) {
-      console.error('Error registering user:', error);
-      // Handle error
+      console.error("Error:", error);
+      console.log("Response:", error.response);
+      setError(error.response.data.message);
     }
   };
 
   return (
-    <div className="login-container">
-      <h1>User Sign Up Page</h1>
+    <div>
+      <h2>User Sign Up</h2>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Username</label>
-          <input
-            type="text"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            placeholder="Enter username"
-          />
-        </div>
-        <div className="form-group">
-          <label>Password</label>
-          <input
-            type="password"
-            name="userpwd"
-            value={formData.password}
-            onChange={handleChange}
-            placeholder="Enter password"
-          />
-        </div>
-        <div className="form-group">
-          <label>Email</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="Enter email"
-          />
-        </div>
-        <div className="form-group">
-          <label>Mobile Number</label>
-          <input
-            type="tel"
-            name="usrphno"
-            value={formData.mobileNumber}
-            onChange={handleChange}
-            placeholder="Enter mobile number"
-          />
-        </div>
         
-        <button type="submit" className="submit-button">Login</button>
+        <input type="text" name="username" placeholder="Username" value={formData.username} onChange={handleChange} /><br/>
+        <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} /><br/>
+        <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} /><br/>
+        <input type="text" name="name" placeholder="Name (Optional)" value={formData.name} onChange={handleChange} /><br/>
+        <input type="file" name="profilePicture" onChange={handleFileChange} /><br/>
+        <button type="submit">Sign Up</button>
+        <button type = "submit" onClick={handleSignInClick}>Sign In</button>
+        {error && <div style={{ color: 'red' }}>{error}</div>}
+        {successMessage && <div style={{ color: 'green' }}>{successMessage}</div>}
       </form>
     </div>
   );
 }
 
 export default UsrSigUp;
-
