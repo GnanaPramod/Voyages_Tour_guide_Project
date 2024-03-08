@@ -43,8 +43,12 @@ function SignInUser() {
       if (response.data.success) {
         // Redirect to dashboard or profile page upon successful sign-in
         console.log('Sign in successful');
+<<<<<<< HEAD
         localStorage.setItem('email', formData.email);
         navigate('/userintf');
+=======
+        navigate('/tourpage/success');
+>>>>>>> 8a1cec28b0597c33227f67b7a4c1931e1fde4f4a
       } else {
         setError(response.data.message);
       }

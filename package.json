@@ -15,7 +15,10 @@
     "cors": "^2.8.5",
     "express": "^4.18.3",
     "express-rate-limit": "^7.2.0",
+<<<<<<< HEAD
     "jsonwebtoken": "^9.0.2",
+=======
+>>>>>>> 8a1cec28b0597c33227f67b7a4c1931e1fde4f4a
     "mongoose": "^8.2.1",
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.9.11",

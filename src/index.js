@@ -21,8 +21,11 @@ import UserIntf from './pages/UserIntf.js';
 import UsrResetPwd from './pages/PasswordReset/UsrResetPwd.js';
 import GuideResetPwd from './pages/PasswordReset/GuideResetPwd.js';
 import MgrResetPwd from './pages/PasswordReset/MgrResetPwd.js';
+<<<<<<< HEAD
 import MangrUpload from './pages/ManagerPages/MangrUpload.jsx';
 import Guide from './pages/Guide.js';
+=======
+>>>>>>> 8a1cec28b0597c33227f67b7a4c1931e1fde4f4a
 const router = createBrowserRouter([
    {
       path:"/",
