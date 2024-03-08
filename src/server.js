@@ -10,6 +10,10 @@ import multer from 'multer';
 //const multer = require('multer');
 import nodemailer from 'nodemailer';
 //const nodemailer = require('nodemailer');
+<<<<<<< HEAD
+//import jwt from 'jsonwebtoken';
+=======
+>>>>>>> 8a1cec28b0597c33227f67b7a4c1931e1fde4f4a
 //import rateLimit from 'express-rate-limit';
 //const rateLimit = require('express-rate-limit');
 const app = express();
@@ -79,7 +83,11 @@ app.use(bodyParser.json());
 // Multer configuration for file upload
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
+<<<<<<< HEAD
+    cb(null, 'uploads');
+=======
     cb(null, 'uploads/');
+>>>>>>> 8a1cec28b0597c33227f67b7a4c1931e1fde4f4a
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname);
@@ -278,6 +286,10 @@ app.post('/signup', upload.single('profilePicture'), async (req, res) => {
       const user = await User.findOne({ email, password });
       if (user) {
         // Successful sign-in
+<<<<<<< HEAD
+        //const token = jwt.sign({ email: user.email }, 'secretKey', { expiresIn: '1h' });
+=======
+>>>>>>> 8a1cec28b0597c33227f67b7a4c1931e1fde4f4a
         return res.status(200).json({ success: true, message: 'Sign in successful' });
       } else {
         return res.status(401).json({ success: false, message: 'Invalid credentials' });
@@ -287,6 +299,56 @@ app.post('/signup', upload.single('profilePicture'), async (req, res) => {
       res.status(500).json({ success: false, message: 'Internal server error' });
     }
   });
+<<<<<<< HEAD
+  //user-profile
+  app.get('/user/profile/:email', async (req, res) => {
+    try {
+      const email = req.params.email;
+      const user = await User.findOne({ email });
+  
+      if (user) {
+        res.status(200).json(user);
+      } else {
+        res.status(404).json({ message: 'User not found' });
+      }
+    } catch (error) {
+      console.error('Error fetching user profile:', error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  });
+  app.get('/mgr/profile/:email', async (req, res) => {
+    try {
+      const email = req.params.email;
+      const user = await Mgr.findOne({ email });
+  
+      if (user) {
+        res.status(200).json(user);
+      } else {
+        res.status(404).json({ message: 'User not found' });
+      }
+    } catch (error) {
+      console.error('Error fetching user profile:', error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  });
+  app.get('/guide/profile/:email', async (req, res) => {
+    try {
+      const email = req.params.email;
+      const user = await Guide.findOne({ email });
+  
+      if (user) {
+        res.status(200).json(user);
+      } else {
+        res.status(404).json({ message: 'User not found' });
+      }
+    } catch (error) {
+      console.error('Error fetching user profile:', error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  });
+  
+=======
+>>>>>>> 8a1cec28b0597c33227f67b7a4c1931e1fde4f4a
   app.post('/mgrsignin', async (req, res) => {
     try {
       const { email, password } = req.body;
