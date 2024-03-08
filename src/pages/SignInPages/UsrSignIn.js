@@ -1,8 +1,8 @@
 import React from 'react';
-import LoginPage from './LoginPage.jsx';
+import SignInUser from './SignInUser.jsx';
 function UsrSignIn(){
     return(
-        <LoginPage/>
+        <SignInUser/>
     );
 }
 export default UsrSignIn;

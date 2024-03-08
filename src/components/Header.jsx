@@ -12,7 +12,7 @@ function Header(){
         <Logo/>
         <input id = "searchBar" type = "text" placeholder=' 🔍 Enter Location'/>
         <Link id = "home" to ="/">Home</Link>
-        <Link id = "signup" to = "/signup">Sign Out</Link>
+        <Link id = "signup" to = "/signupcom">Sign Up</Link>
         <Link id ="signin" to ="/signincom">Sign In</Link>
         <Link  id = "about" to ="/signupcom">About</Link>
         <Link id = "contactus" to = "/contact">Contact Us</Link>
