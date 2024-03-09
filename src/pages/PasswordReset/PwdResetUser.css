@@ -1,0 +1,54 @@
+.password-reset-user {
+    height: 100vh;
+    margin-left: 450px; 
+     margin-right:450px;
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(90deg, #D04848, #F3B);
+  }
+  
+  .password-reset-user h2 {
+    text-align: center;
+    color: #1a44de;
+  }
+  
+  .password-reset-user form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .password-reset-user input {
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #1f18eb;
+    border-radius: 20px;
+  }
+  
+  .password-reset-user button {
+    padding: 10px;
+    padding-left: 5px;
+    margin-left: 200px;
+    margin-right: 200px;
+    margin-top: 30px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .password-reset-user button:hover {
+    background-color: #45a049;
+  }
+  
+  .password-reset-user .message {
+    color: green;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .password-reset-user .error {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
