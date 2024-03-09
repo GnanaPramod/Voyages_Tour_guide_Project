@@ -1,5 +1,5 @@
 // PasswordReset.js
-
+import "./PwdResetGuide.css";
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -41,12 +41,14 @@ function PwdResetGuide() {
   };
 
   return (
-    <div>
+    <div className="password-reset-guide">
       <h2>Guide Password Reset</h2>
       <form onSubmit={handleResetPassword}>
+      <div className="gui">
         <input type="email" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} /><br />
         <input type="password" placeholder="Enter new password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} /><br />
         <input type="password" placeholder="Confirm new password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} /><br />
+      </div>
         <button type="submit">Reset Password</button>
         <button type = "submit" onClick={handleSignInClick}>Sign In</button>
       </form>

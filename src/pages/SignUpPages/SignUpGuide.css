@@ -3,9 +3,9 @@
     max-width: 100vw; */
     margin: 0 auto;
     padding: 20px;
-    padding-bottom:180px;
+    padding-bottom:170px;
     border-radius: 10px;
-    background: linear-gradient(90deg, #FFA1F5, #BC7AF9);
+    background: linear-gradient(90deg, #ef84e4, #734e96);
   }
 
   .sign-up-gui h2 {

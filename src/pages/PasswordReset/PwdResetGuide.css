@@ -1,0 +1,54 @@
+.password-reset-guide {
+    height: 100vh;
+    margin-left: 450px; 
+     margin-right:450px;
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(90deg, #06d4d7, #2c285d);
+  }
+  
+  .password-reset-guide h2 {
+    text-align: center;
+    color: #1f2129;
+  }
+  
+  .password-reset-guide form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .password-reset-guide input {
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #1f18eb;
+    border-radius: 20px;
+  }
+  
+  .password-reset-guide button {
+    padding: 10px;
+    padding-left: 5px;
+    margin-left: 200px;
+    margin-right: 200px;
+    margin-top: 30px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .password-reset-guide button:hover {
+    background-color: #45a049;
+  }
+  
+  .password-reset-guide .message {
+    color: green;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .password-reset-guide .error {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+  }
+  

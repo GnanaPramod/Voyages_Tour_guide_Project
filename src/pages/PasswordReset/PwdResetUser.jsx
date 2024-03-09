@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import "./PwdResetUser.css";
 function PwdResetUser() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
@@ -40,12 +41,14 @@ function PwdResetUser() {
   };
 
   return (
-    <div>
+    <div className="password-reset-user">
       <h2>User Password Reset</h2>
       <form onSubmit={handleResetPassword}>
+      <div className="usr">
         <input type="email" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} /><br />
         <input type="password" placeholder="Enter new password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} /><br />
         <input type="password" placeholder="Confirm new password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} /><br />
+      </div>
         <button type="submit">Reset Password</button>
         <button type = "submit" onClick={handleSignInClick}>Sign In</button>
       </form>
