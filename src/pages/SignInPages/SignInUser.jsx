@@ -1,9 +1,7 @@
-
-
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import "./SignInUser.css";
 function SignInUser() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -43,12 +41,10 @@ function SignInUser() {
       if (response.data.success) {
         // Redirect to dashboard or profile page upon successful sign-in
         console.log('Sign in successful');
-<<<<<<< HEAD
+
         localStorage.setItem('email', formData.email);
         navigate('/userintf');
-=======
-        navigate('/tourpage/success');
->>>>>>> 8a1cec28b0597c33227f67b7a4c1931e1fde4f4a
+
       } else {
         setError(response.data.message);
       }
@@ -63,26 +59,31 @@ function SignInUser() {
   };
 
   return (
-    <div>
-      <h2>User Sign In</h2>
-      <form onSubmit={handleSubmit}>
-        <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} /><br/>
-        <input 
-          type={formData.showPassword ? "text" : "password"} 
-          name="password" 
-          placeholder="Password" 
-          value={formData.password} 
-          onChange={handleChange} 
-        />
-        <button type="button" onClick={handleTogglePasswordVisibility}>
-          {formData.showPassword ? "Hide" : "Show"}
-        </button><br/>
-        <button type="submit">Sign In</button>
-      </form>
-      <button onClick={handleResetPassword}>Reset Password</button>
-      {error && <div style={{ color: 'red' }}>{error}</div>}
+    <div className="sign-in-user">
+    <h2>User Sign In</h2>
+    <form onSubmit={handleSubmit}>
+    <div className="usr">
+      <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} />
+      <br />
+      <input
+        type={formData.showPassword ? "text" : "password"}
+        name="password"
+        placeholder="Password"
+        value={formData.password}
+        onChange={handleChange}
+      />
+    
+    </div>  
+      <button type="button" onClick={handleTogglePasswordVisibility}>
+        {formData.showPassword ? "Hide" : "Show"}
+      </button>
+      <br />
+      <button type="submit">Sign In</button>
+    </form>
+    <button className="rst" onClick={handleResetPassword}>Reset Password</button>
+    {error && <div className="error">{error}</div>}
     </div>
-  );
-}
+);
+};
 
 export default SignInUser;

@@ -1,0 +1,63 @@
+.sign-in-gui {
+    max-width:100vw;
+    height: 100vh;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(90deg, #D04848, #F3B95F);
+
+  }
+  
+  .sign-in-gui h2 {
+    text-align: center;
+    color: #1e201d;
+  }
+  
+  .sign-in-gui form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+  }
+  
+  .sign-in-gui input {
+    padding-left: 150px;
+    margin: 10px 0;
+    border: 3px solid #76a31c;
+    border-radius: 15px;
+    transition: border-color 0.3s ease;
+    align-items: center;
+    text-align: left;
+  }
+  
+  .sign-in-gui input:focus {
+    outline: none;
+    border-color: #131311;
+  }
+  
+  .sign-in-gui button {
+    padding:15px;
+    text-align: left;
+/* padding:10px; */
+    margin-top: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .sign-in-gui button:hover {
+    background-color: #4CAF50;
+    color: #fff;
+  }
+  .rst{
+    margin-left: 680px;
+  }
+  
+  .error {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+  }
+  

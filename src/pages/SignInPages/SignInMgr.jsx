@@ -1,4 +1,4 @@
-
+import "./SignInMgr.css";
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -42,12 +42,9 @@ function SignInMgr() {
       if (response.data.success) {
         // Redirect to dashboard or profile page upon successful sign-in
         console.log('Sign in successful');
-<<<<<<< HEAD
+
         localStorage.setItem('email', formData.email);
         navigate('/manager');
-=======
-        navigate('/tourpage/success');
->>>>>>> 8a1cec28b0597c33227f67b7a4c1931e1fde4f4a
       } else {
         setError(response.data.message);
       }
@@ -62,9 +59,10 @@ function SignInMgr() {
   };
 
   return (
-    <div>
+    <div className="sign-in-mgr">
       <h2>Manager Sign In</h2>
       <form onSubmit={handleSubmit}>
+      <div className="mgr">
         <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} /><br/>
         <input 
           type={formData.showPassword ? "text" : "password"} 
@@ -73,12 +71,13 @@ function SignInMgr() {
           value={formData.password} 
           onChange={handleChange} 
         />
+        </div>
         <button type="button" onClick={handleTogglePasswordVisibility}>
           {formData.showPassword ? "Hide" : "Show"}
         </button><br/>
         <button type="submit">Sign In</button>
       </form>
-      <button onClick={handleResetPassword}>Reset Password</button>
+      <button className="rst" onClick={handleResetPassword}>Reset Password</button>
       {error && <div style={{ color: 'red' }}>{error}</div>}
     </div>
   );
