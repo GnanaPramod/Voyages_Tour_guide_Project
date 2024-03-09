@@ -1,0 +1,63 @@
+.sign-in-mgr {
+    max-width:100vw;
+    height: 100vh;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(90deg, #944E63, #f0bfc7);
+
+  }
+  
+  .sign-in-mgr h2 {
+    text-align: center;
+    color: #4e1e76;
+  }
+  
+  .sign-in-mgr form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+  }
+  
+  .sign-in-mgr input {
+    padding-left: 150px;
+    margin: 10px 0;
+    border: 3px solid #e732bd;
+    border-radius: 15px;
+    transition: border-color 0.3s ease;
+    align-items: center;
+    text-align: left;
+  }
+  
+  .sign-in-mgr input:focus {
+    outline: none;
+    border-color: #893798;
+  }
+  
+  .sign-in-mgr button {
+    padding:15px;
+    text-align: left;
+/* padding:10px; */
+    margin-top: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .sign-in-mgr button:hover {
+    background-color: #4CAF50;
+    color: #fff;
+  }
+  .rst{
+    margin-left: 680px;
+  }
+  
+  .error {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
