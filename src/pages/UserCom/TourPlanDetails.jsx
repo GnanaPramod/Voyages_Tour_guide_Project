@@ -141,7 +141,9 @@ function TourPlanDetails() {
 }
 
 export default TourPlanDetails;**/
-import React, { useState, useEffect } from 'react';
+
+/**(3)import React, { useState, useEffect } from 'react';
+
 import axios from 'axios';
 import TourPlanCard from './TourPlanCard.jsx'; // Importing the TourPlanCard component
 
@@ -197,4 +199,67 @@ function TourPlanDetails() {
   );
 }
 
+
+export default TourPlanDetails;**/
+
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import TourPlanCard from './TourPlanCard.jsx'; // Importing the TourPlanCard component
+
+function TourPlanDetails() {
+  const [tourPlans, setTourPlans] = useState([]);
+  const [confirmation, setConfirmation] = useState(false);
+  const userEmail = localStorage.getItem('email');
+
+  const fetchAllTourPlans = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5000/fetchTourPlan/${userEmail}`);
+      setTourPlans(response.data);
+    } catch (error) {
+      console.error('Error fetching tour plans:', error);
+      setTourPlans([]); // Set tourPlans as an empty array if there's an error
+    }
+  };
+
+  const handleConfirm = async (tourPlanId) => {
+    try {
+      await axios.post(`http://localhost:5000/confirmTourPlan`, {
+        tourPlanId: tourPlanId
+      });
+
+      // Update state to indicate confirmation
+      setConfirmation(true);
+    } catch (error) {
+      console.error('Error confirming tour plan:', error);
+    }
+  };
+
+  useEffect(() => {
+    if (userEmail !== '') {
+      fetchAllTourPlans();
+    }
+  }, [userEmail]);
+
+  return (
+    <div>
+      <h1>All Tour Plan Details</h1>
+      {tourPlans.length > 0 ? (
+        tourPlans.map((tourPlan, index) => (
+          <div key={index}>
+            <TourPlanCard
+              tourPlan={tourPlan}
+              handleConfirm={handleConfirm}
+              confirmation={confirmation}
+            />
+          </div>
+        ))
+      ) : (
+        <p>No tour plans found.</p>
+      )}
+    </div>
+  );
+}
+
 export default TourPlanDetails;
+
+
