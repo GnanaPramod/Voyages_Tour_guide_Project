@@ -43,7 +43,7 @@ function MangrUpload() {
     }
 
     try {
-      await axios.post('http://localhost:3000/manager', data, {
+      await axios.post('http://localhost:5000/manager', data, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -73,9 +73,17 @@ function MangrUpload() {
           <input type="text" name="places" value={formData.places} onChange={handleInputChange} />
         </label>
         <label>
-          Description:
-          <input type="text" name="description" value={formData.description} onChange={handleInputChange} />
+          Description:<br/>
+          <textarea 
+            name="description" 
+            value={formData.description} 
+            onChange={handleInputChange} 
+            rows="13" 
+            cols="50" 
+            style={{ resize: "vertical" }} 
+          />
         </label>
+
         <label>
           Days Can Spend:
           <input type="number" name="days" value={formData.days} onChange={handleInputChange} />
