@@ -10,6 +10,9 @@ import multer from 'multer';
 //const multer = require('multer');
 import nodemailer from 'nodemailer';
 //const nodemailer = require('nodemailer');
+//import path from 'path';
+import { fileURLToPath } from 'url';
+import path, { dirname } from 'path';
 
 //import jwt from 'jsonwebtoken';
 //import rateLimit from 'express-rate-limit';
@@ -63,10 +66,62 @@ const GuideSchema = new mongoose.Schema({
   username: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  locname: { type: String, required: true },
   name: { type: String },
   profilePicture: { type: String },
   guideid: { type: String, required: true }
 });
+const tourSchema = new mongoose.Schema({
+  locid: Number,
+  locname: String,
+  places: String,
+  description: String,
+  days: Number,
+  budget: Number,
+  images: [String] // Array of image filenames
+});
+const tourRequirementSchema = new mongoose.Schema({
+  userid: { type: Number, required: true },
+  username: { type: String, required: true },
+  usrphno: { type: Number, required: true },
+  email: { type: String, required: true },
+  locname: { type: String, required: true },
+  days: { type: Number, required: true },
+  fromdate: { type: Date, required: true },
+  todate: { type: Date, required: true },
+  bdgt: { type: Number, required: true },
+  plcs: { type: String, required: true },
+  timestamp: { type: Date, default: Date.now }
+});
+// Create Schema for Tour Plan
+const tourPlanSchema = new mongoose.Schema({
+  userEmail: String,
+  guideEmail: String,
+  locname:String,
+  planDetails: String,
+  hotelAccommodation: String,
+  travelVehicleDetails: String,
+  fromdate: { type: Date, required: true },
+  todate: { type: Date, required: true },
+  hotelImages: [String],
+  vehicleImages: [String],
+  placesImages: [String],
+  budget: Number
+});
+// Define schema for confirmed tour plan details
+const confirmedDetailsSchema = new mongoose.Schema({
+  userEmail: String,
+  guideEmail: String,
+  locname:String,
+  fromDate: Date,
+  toDate: Date
+});
+
+// Create model for confirmed tour plan details
+const ConfirmedDetails = mongoose.model('ConfirmedDetails', confirmedDetailsSchema);
+const TourPlan = mongoose.model('TourPlan', tourPlanSchema);
+const TourRequirement = mongoose.model('TourRequirement', tourRequirementSchema);
+const Tour = mongoose.model('Tour', tourSchema);
 const User = mongoose.model('User', userSchema);
 
 
@@ -78,21 +133,68 @@ const Guide = mongoose.model('Guide', GuideSchema);
 app.use(cors());
 app.use(bodyParser.json());
 
-// Multer configuration for file upload
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-
     cb(null, 'uploads');
-
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname);
+    cb(null, file.originalname); 
   }
 });
 
-const upload = multer({ storage: storage });
 
-// Nodemailer configuration
+const upload = multer({ storage: storage });
+//GuideUpload
+app.post('/guideupload', upload.fields([
+  { name: 'hotelImages', maxCount: 10 },
+  { name: 'vehicleImages', maxCount: 10 },
+  { name: 'placesImages', maxCount: 10 }
+]), async (req, res) => {
+  try {
+    const { userEmail, guideEmail, locname, planDetails, hotelAccommodation, travelVehicleDetails, fromdate, todate, budget } = req.body;
+    const hotelImages = req.files['hotelImages'].map(file => file.filename);
+    const vehicleImages = req.files['vehicleImages'].map(file => file.filename);
+    const placesImages = req.files['placesImages'].map(file => file.filename);
+
+    const tourPlan = new TourPlan({
+      userEmail,
+      guideEmail,
+      locname,
+      planDetails,
+      hotelAccommodation,
+      travelVehicleDetails,
+      fromdate,
+      todate,
+      hotelImages,
+      vehicleImages,
+      placesImages,
+      budget
+    });
+
+    await tourPlan.save();
+    res.status(200).send("Tour plan uploaded successfully");
+  } catch (error) {
+    console.error('Error uploading tour plan:', error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+// Endpoint to fetch tour plan details based on user email
+app.get('/fetchTourPlan/:userEmail', async (req, res) => {
+  try {
+    const userEmail = req.params.userEmail;
+    const tourPlan = await TourPlan.find({ userEmail });
+    if (!tourPlan) {
+      res.status(404).send('Tour plan not found for the given email');
+    } else {
+      res.status(200).json(tourPlan);
+    }
+  } catch (error) {
+    console.error('Error fetching tour plan:', error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+// Define route to fetch all tour plans associated with a specific user email
+
 
 const transporter = nodemailer.createTransport({
   service: 'Gmail',
@@ -101,55 +203,55 @@ const transporter = nodemailer.createTransport({
       pass: 'bynw qsyz fbqy guvq' // Your Gmail password
     }
   });
-
 app.post('/signup', upload.single('profilePicture'), async (req, res) => {
-    try {
-      const { username, email, password, name } = req.body;
-  
-      // Basic validation
-      if (!username || !email || !password) {
-        return res.status(400).json({ message: 'All fields are required' });
-      }
-      
-      // Check if user already exists
-      const existingUser = await User.findOne({ email });
-      if (existingUser) {
-        return res.status(400).json({ message: 'Email already exists' });
-      }
-  
-      // Create new user
-      const newUser = new User({
-        username,
-        email,
-        password,
-        name,
-        profilePicture: req.file ? req.file.path : ''
-      });
-  
-      await newUser.save();
-  
-      // Send confirmation email
-      const mailOptions = {
-        from: 'projectplazapro@gmail.com',
-        to: email,
-        subject: 'Welcome to MyApp!',
-        text: `Dear ${name},\n\nThank you for signing up with MyApp.`
-      };
-  
-      transporter.sendMail(mailOptions, function(error, info){
-        if (error) {
-          console.log(error);
-        } else {
-          console.log('Email sent: ' + info.response);
-        }
-      });
-  
-      res.status(201).json({ message: 'User created successfully' });
-    } catch (error) {
-      console.error('Signup error:', error);
-      res.status(500).json({ message: 'Internal server error' });
+  try {
+    const { username, email, password, name } = req.body;
+
+    // Basic validation
+    if (!username || !email || !password) {
+      return res.status(400).json({ message: 'All fields are required' });
     }
-  });
+    
+    // Check if user already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: 'Email already exists' });
+    }
+
+    // Create new user
+    const newUser = new User({
+      username,
+      email,
+      password,
+      name,
+      profilePicture: req.file ? req.file.filename : '' // Save only the filename in the database
+    });
+
+    await newUser.save();
+
+    // Send confirmation email
+    const mailOptions = {
+      from: 'projectplazapro@gmail.com',
+      to: email,
+      subject: 'Welcome to MyApp!',
+      text: `Dear ${name},\n\nThank you for signing up with MyApp.`
+    };
+
+    transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
+
+    res.status(201).json({ message: 'User created successfully' });
+  } catch (error) {
+    console.error('Signup error:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
   const transporter1 = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
@@ -218,7 +320,7 @@ app.post('/signup', upload.single('profilePicture'), async (req, res) => {
     });
   app.post('/guidesignup', upload.single('profilePicture'), async (req, res) => {
     try {
-      const { username, email, password, name, guideid } = req.body;
+      const { username, email, password, locname, name, guideid } = req.body;
       if (guideid !== '1445') {
         return res.status(400).json({ message: 'Invalid guide ID' });
       }
@@ -239,6 +341,7 @@ app.post('/signup', upload.single('profilePicture'), async (req, res) => {
         username,
         email,
         password,
+        locname,
         name,
         guideid,
         profilePicture: req.file ? req.file.path : ''
@@ -268,7 +371,74 @@ app.post('/signup', upload.single('profilePicture'), async (req, res) => {
       res.status(500).json({ message: 'Internal server error' });
     }
   });
+ // Define route to confirm tour plan details
+app.post('/confirmTourPlan', async (req, res) => {
+  try {
+    // Extract details from request body
+    const { userEmail, guideEmail, locname, fromDate, toDate } = req.body;
+
+    // Create new confirmed tour plan document
+    const confirmedDetails = new ConfirmedDetails({
+      userEmail,
+      guideEmail,
+      locname,
+      fromDate,
+      toDate
+    });
+
+    // Save confirmed tour plan to database
+    await confirmedDetails.save();
+
+    // Delete remaining tour plan details based on user email
+    // Note: Change 'TourPlan' to the appropriate model name if it's different
+    //await TourPlan.deleteMany({ userEmail });
+    // Delete remaining tour plan details except the one that is confirmed
+    await TourPlan.deleteMany({ userEmail, guideEmail: { $ne: guideEmail } });
+    res.status(200).send('Tour plan confirmed and saved successfully');
+  } catch (error) {
+    console.error('Error confirming tour plan:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+  app.post('/manager', upload.array('images'), async (req, res) => {
+    try {
+      const { locid, locname, places, description, days, budget } = req.body;
+      const images = req.files.map(file => file.originalname);
+  
+      // Save tour data to MongoDB
+      const tour = new Tour({
+        locid,
+        locname,
+        places,
+        description,
+        days,
+        budget,
+        images
+      });
+      await tour.save();
+  
+      // Return a success response
+      res.status(200).json({ message: 'Tour created successfully', tour });
+    } catch (error) {
+      console.error('Error creating tour:', error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  });
+  
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = dirname(__filename);
+  app.use("/uploads",express.static(path.join(__dirname,"/uploads")));
   //signin-authentication
+  // Get all tours
+app.get('/tours', async (req, res) => {
+  try {
+    const tours = await Tour.find();
+    res.status(200).json(tours);
+  } catch (error) {
+    console.error('Error fetching tours:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
   app.post('/signin', async (req, res) => {
     try {
       const { email, password } = req.body;
@@ -303,6 +473,8 @@ app.post('/signup', upload.single('profilePicture'), async (req, res) => {
       const user = await User.findOne({ email });
   
       if (user) {
+        //const profilePictureFilename = user.profilePicture.split('\\').pop();
+        //user.profilePicture = profilePictureFilename; // Update the profile picture path to only the filename
         res.status(200).json(user);
       } else {
         res.status(404).json({ message: 'User not found' });
@@ -318,6 +490,7 @@ app.post('/signup', upload.single('profilePicture'), async (req, res) => {
       const user = await Mgr.findOne({ email });
   
       if (user) {
+        
         res.status(200).json(user);
       } else {
         res.status(404).json({ message: 'User not found' });
@@ -388,6 +561,95 @@ app.post('/signup', upload.single('profilePicture'), async (req, res) => {
       res.status(500).json({ success: false, message: 'Internal server error' });
     }
   });
+  app.get('/tours/:locationName', async (req, res) => {
+    try {
+        const locationName = req.params.locationName;
+        const tour = await Tour.findOne({ locname: locationName });
+        res.json(tour);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+app.post('/tourpage', async (req, res) => {
+  try {
+    const {
+      userid,
+      username,
+      usrphno,
+      email,
+      locname,
+      days,
+      fromdate,
+      todate,
+      bdgt,
+      plcs
+    } = req.body;
+
+    const tourRequirement = new TourRequirement({
+      userid,
+      username,
+      usrphno,
+      email,
+      locname,
+      days,
+      fromdate,
+      todate,
+      bdgt,
+      plcs
+    });
+
+    await tourRequirement.save();
+    const guides = await Guide.find({ locname: locname });
+    const transporter3 = nodemailer.createTransport({
+      service: 'Gmail',
+      auth: {
+          user: 'projectplazapro@gmail.com', // Your Gmail email address
+          pass: 'bynw qsyz fbqy guvq' // Your Gmail password
+        }
+      });
+    // Iterate through each guide and send an email
+    for (const guide of guides) {
+      const mailOptions = {
+        from: 'projectplazapro@gmail.com', // Sender address
+        to: guide.email, // Receiver address
+        subject: 'New Tour Request', // Subject line
+        text: `Hello ${guide.username},\n\nYou have a new tour request. Please check your dashboard for more details.\n\nRegards,\nVoyages Tour and Travels Pvt.Limited` // Plain text body
+      };
+
+      // Send email
+      await transporter3.sendMail(mailOptions);
+    }
+    res.status(201).send(tourRequirement);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+// Your other middleware and configurations
+app.get('/tourRequirements', async (req, res) => {
+  try {
+    const { locname } = req.query;
+    let query = {};
+
+    // If locname is provided, filter by locname
+    if (locname) {
+      query = { locname: { $regex: new RegExp(locname, 'i') } };
+    }
+
+    // Fetch tour requirements from the database, sorted by timestamp in descending order
+    const tourRequirements = await TourRequirement.find(query).sort({ timestamp: -1 }).exec();
+    res.status(200).json(tourRequirements);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});/** 
+app.get('/api/tourRequirements', async (req, res) => {
+  try {
+    const tourRequirements = await TourRequirement.find().exec();
+    res.status(200).json(tourRequirements);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});**/
   // Password reset route
 app.post('/reset-password', async (req, res) => {
   try {
@@ -409,6 +671,7 @@ app.post('/reset-password', async (req, res) => {
     res.status(500).json({ success: false, message: 'Internal server error' });
   }
 });
+
 app.post('/reset-passwordmgr', async (req, res) => {
   try {
     const { email, newPassword } = req.body;

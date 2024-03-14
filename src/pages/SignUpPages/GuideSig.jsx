@@ -8,6 +8,7 @@ function GuideSig() {
     username: '',
     email: '',
     password: '',
+    locname:'',
     name: '',
     profilePicture: null,
     guideid: '' // Manager ID field
@@ -50,6 +51,7 @@ function GuideSig() {
       formDataToSend.append('username', formData.username);
       formDataToSend.append('email', formData.email);
       formDataToSend.append('password', formData.password);
+      formDataToSend.append('locname', formData.locname);
       formDataToSend.append('name', formData.name);
       formDataToSend.append('profilePicture', formData.profilePicture);
       formDataToSend.append('guideid', formData.guideid);
@@ -75,7 +77,9 @@ function GuideSig() {
         <input type="text" name="username" placeholder="Username" value={formData.username} onChange={handleChange} /><br/>
         <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} /><br/>
         <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} /><br/>
+        <input type="text" name="locname" placeholder="Loc Name (Optional)" value={formData.locname} onChange={handleChange} /><br/>
         <input type="text" name="name" placeholder="Name (Optional)" value={formData.name} onChange={handleChange} /><br/>
+        
         <input type="file" name="profilePicture" onChange={handleFileChange} /><br/>
         <input type="text" name="guideid" placeholder="Guide ID" value={formData.guideid} onChange={handleChange} /><br/> {/* Manager ID field */}
       </div>

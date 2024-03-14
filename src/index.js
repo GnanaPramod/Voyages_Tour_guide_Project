@@ -23,6 +23,11 @@ import GuideResetPwd from './pages/PasswordReset/GuideResetPwd.js';
 import MgrResetPwd from './pages/PasswordReset/MgrResetPwd.js';
 import MangrUpload from './pages/ManagerPages/MangrUpload.jsx';
 import Guide from './pages/Guide.js';
+import TourPgInfo from './pages/TourPageCompenent/TourPgInfo.jsx';
+import TourPageloc from './pages/TourPageCompenent/TourPageloc.jsx';
+import GuideUsrInfo from './pages/GuidePages/GuideUsrInfo.jsx';
+import GuidePlans from './pages/GuidePages/GuidePlans.jsx';
+import TourPlanDetails from './pages/UserCom/TourPlanDetails.jsx';
 const router = createBrowserRouter([
    {
       path:"/",
@@ -33,12 +38,28 @@ const router = createBrowserRouter([
       element: <About/>
    },
    {
+      path:"/usrtoinfo",
+      element:<GuideUsrInfo/>
+   },
+   {
       path:"/contact",
       element: <Contact/>
    },
    {
+      path:"/tourplandetails",
+      element:<TourPlanDetails/>
+   },
+   {
+      path:"/tourpage/:locationName",
+      element:<TourPageloc/>
+   },
+   {
       path:"/tourpage",
       element: <TourPage/>
+   },
+   {
+      path:"/guideplans",
+      element:<GuidePlans/>
    },
    {
       path:"/signup",
@@ -47,6 +68,10 @@ const router = createBrowserRouter([
    {
       path:"/tourpage/success",
       element:<Success/>
+   },
+   {
+      path:"/tourpginfo",
+      element:<TourPgInfo/>
    },
    {
       path:"/manager",
