@@ -1,8 +1,8 @@
-<<<<<<< HEAD
+
 /**(1)import React from 'react';
-=======
+
 import React from 'react';
->>>>>>> e5b0befb5d229766ea75ea916f569481e7625d78
+
 
 function TourPlanCard(props) {
   const { tourPlan } = props; // Destructuring tourPlan from props
@@ -39,7 +39,7 @@ function TourPlanCard(props) {
   );
 }
 
-<<<<<<< HEAD
+
 export default TourPlanCard;**/
 import React, { useState } from 'react';
 import axios from 'axios'; // Import axios for making HTTP requests
@@ -107,6 +107,4 @@ function TourPlanCard(props) {
 export default TourPlanCard;
 
 
-=======
-export default TourPlanCard;
->>>>>>> e5b0befb5d229766ea75ea916f569481e7625d78
+
