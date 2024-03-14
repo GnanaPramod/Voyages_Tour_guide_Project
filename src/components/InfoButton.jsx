@@ -1,6 +1,6 @@
 import React, {useState}from 'react';
 import { useNavigate } from 'react-router-dom';
-function Places(props){
+function InfoButton(props){
     const navigate = useNavigate();
     const handleClick = () => {
         localStorage.setItem('locname', props.name);
@@ -19,12 +19,10 @@ function Places(props){
     //}
     return (
         <button onClick={handleClick} style = {{backgroundColor:isMouse?"#ffa500":"white"}} onMouseOver = {handleMouseOver} onMouseOut = {handleMouseOut}  id = "plcs">
-            <img id = "img1" src = {props.img} alt = "logo"/>
-            <div id = "plcnm">
-                {props.name}
-            </div>
-            <div id = "subnm">{props.info}</div>
+            <div>{props.username}</div>
+            <div>{props.timestamp}</div>
+            <div>{props.days}</div>
         </button>
     );
 }
-export default Places;
+export default InfoButton;

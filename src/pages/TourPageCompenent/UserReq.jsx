@@ -25,7 +25,7 @@ const UserReq = () => {
   const handleSubmit = async event => {
     event.preventDefault();
     try {
-      const response = await axios.post('/tourpage', formData);
+      const response = await axios.post('http://localhost:5000/tourpage', formData);
       console.log(response.data);
       navigate('/tourpage/success');
 

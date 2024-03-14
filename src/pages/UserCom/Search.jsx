@@ -1,53 +1,54 @@
-/**(original)
-import React from "react"
-import "./Search.css"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStar as goldenstar } from '@fortawesome/free-solid-svg-icons';
-import { faLocationDot as location  } from "@fortawesome/free-solid-svg-icons"; 
+// /**(original)
+// import React from "react"
+// import "./Search.css"
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faStar as goldenstar } from '@fortawesome/free-solid-svg-icons';
+// import { faLocationDot as location  } from "@fortawesome/free-solid-svg-icons"; 
 
-import img1 from './userimg/IndianGate.jpg';
-import img2 from './userimg/lotusTemple.jpg';
-import img3 from './userimg/goldenTemple.jpg';
-import img4 from './userimg/mysorepalace.jpg';
-import img5 from './userimg/Tajmahal.jpg';
+// import img1 from './userimg/IndianGate.jpg';
+// import img2 from './userimg/lotusTemple.jpg';
+// import img3 from './userimg/goldenTemple.jpg';
+// import img4 from './userimg/mysorepalace.jpg';
+// import img5 from './userimg/Tajmahal.jpg';
 
 
 
-function Search(){
-    return(
-          <div>
-          <div className="container">
-            <FontAwesomeIcon icon={location} beat flip="horizontal" size="xl"style={{color: "#74C0FC",}} />
-            <input type="text" placeholder="Enter Location" />
-            <button className="search">Search</button>
-            <button className="subscribe">Subscribe<FontAwesomeIcon icon={goldenstar} fade size="2xl" style={{color: "#080808",}} /></button>
-          </div>
-          <div className="usrimg">
-             <button><img src={img1} alt="Tourist place"/><br></br>Indian Gate</button>
-             <button><img src={img2} alt="Tourist place"/> <br></br>Lotus Temple</button>
-             <button><img src={img3} alt="Tourist place"/><br></br> Golden Temple</button>
-             <button><img src={img4} alt="Tourist place"/><br></br>Mysore Palace</button>
-             <button><img src={img5} alt="Tourist place"/><br></br>Tajmahal</button>
+// function Search(){
+//     return(
+//           <div>
+//           <div className="container">
+//             <FontAwesomeIcon icon={location} beat flip="horizontal" size="xl"style={{color: "#74C0FC",}} />
+//             <input type="text" placeholder="Enter Location" />
+//             <button className="search">Search</button>
+//             <button className="subscribe">Subscribe<FontAwesomeIcon icon={goldenstar} fade size="2xl" style={{color: "#080808",}} /></button>
+//           </div>
+//           <div className="usrimg">
+//              <button><img src={img1} alt="Tourist place"/><br></br>Indian Gate</button>
+//              <button><img src={img2} alt="Tourist place"/> <br></br>Lotus Temple</button>
+//              <button><img src={img3} alt="Tourist place"/><br></br> Golden Temple</button>
+//              <button><img src={img4} alt="Tourist place"/><br></br>Mysore Palace</button>
+//              <button><img src={img5} alt="Tourist place"/><br></br>Tajmahal</button>
 
-          </div>
-          </div>
+//           </div>
+//           </div>
         
-    );
-}
-export default Search;**/
+//     );
+// }
+// export default Search;**/
 // UserProfile.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import { useNavigate } from 'react-router-dom';
 function Search() {
   const [userDetails, setUserDetails] = useState(null);
   const userEmail = localStorage.getItem('email'); // Retrieve the signed-in user's email from local storage
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
         const response = await axios.get(`http://localhost:5000/user/profile/${userEmail}`); // Pass the user's email as part of the request
         setUserDetails(response.data);
+        localStorage.setItem('email', userDetails.email);
       } catch (error) {
         console.error('Error fetching user details:', error);
       }
@@ -55,7 +56,18 @@ function Search() {
 
     fetchUserDetails();
   }, [userEmail]);
+  // Function to format profile picture path
+  function handleBtn(){
+    navigate('/tourpginfo');
+  }
+  function handlePlnBtn(){
+    navigate('/tourplandetails');
+  }
+  function handleTourBtn(){
+    navigate('/tourpage');
+  }
 
+  //const img = 'http://localhost:5000/' + userDetails.profilePicture.replace('\\', '/');
   return (
     <div>
       <h2>User Profile</h2>
@@ -69,8 +81,12 @@ function Search() {
             {console.log('Profile Picture Path:', userDetails.profilePicture)}
             {userDetails.profilePicture && (
   <div>
-    {console.log('Profile Picture Path:', userDetails.profilePicture)}
-    <img src={`http://localhost:5000/${userDetails.profilePicture.replace("uploads\\", "uploads/").replace(/\\/g, "/")}`} alt="Profile" />
+    
+    {console.log('Profile Picture Path:', 'http://localhost:5000/uploads/'+userDetails.profilePicture)}
+    {console.log('Profile Picture Path:', 'http://localhost:5000/' + userDetails.profilePicture.replace('\\', '/'))}
+    
+    <img src={`http://localhost:5000/uploads/${userDetails.profilePicture}`} alt="Profile" />
+    
   </div>
 )}
 
@@ -78,6 +94,9 @@ function Search() {
           )}
         </div>
       )}
+      <button onClick={handleBtn}>Search Locations</button>
+      <button onClick ={handlePlnBtn}>Get Plan Details</button>
+      <button onClick ={handleTourBtn}>Get Guide</button>
     </div>
   );
 }
