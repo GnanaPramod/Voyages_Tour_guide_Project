@@ -141,11 +141,9 @@ function TourPlanDetails() {
 }
 
 export default TourPlanDetails;**/
-<<<<<<< HEAD
+
 /**(3)import React, { useState, useEffect } from 'react';
-=======
-import React, { useState, useEffect } from 'react';
->>>>>>> e5b0befb5d229766ea75ea916f569481e7625d78
+
 import axios from 'axios';
 import TourPlanCard from './TourPlanCard.jsx'; // Importing the TourPlanCard component
 
@@ -201,7 +199,7 @@ function TourPlanDetails() {
   );
 }
 
-<<<<<<< HEAD
+
 export default TourPlanDetails;**/
 
 import React, { useState, useEffect } from 'react';
@@ -264,6 +262,4 @@ function TourPlanDetails() {
 
 export default TourPlanDetails;
 
-=======
-export default TourPlanDetails;
->>>>>>> e5b0befb5d229766ea75ea916f569481e7625d78
+
