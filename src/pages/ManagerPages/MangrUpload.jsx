@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import './MangrUpload.css'; // Import your CSS file for styling
 
 function MangrUpload() {
   const navigate = useNavigate();
@@ -48,7 +49,6 @@ function MangrUpload() {
           'Content-Type': 'multipart/form-data'
         }
       });
-      //alert('Images uploaded successfully');
       navigate('/tourpage/success');
     } catch (error) {
       console.error('Error uploading images:', error);
@@ -57,45 +57,30 @@ function MangrUpload() {
   };
 
   return (
-    <div className="App">
+    <div className="upload-container">
       <h1>Manager Upload</h1>
-      <form onSubmit={handleSubmit}>
-       <label>
-          Location ID:<br/>
-          <input type="number" name="locid" value={formData.locid} onChange={handleInputChange} />
-        </label>
-        <label>
-          Location Name:
-          <input type="text" name="locname" value={formData.locname} onChange={handleInputChange} />
-        </label>
-        <label>
-          Places:
-          <input type="text" name="places" value={formData.places} onChange={handleInputChange} />
-        </label>
-        <label>
-          Description:<br/>
-          <textarea 
-            name="description" 
-            value={formData.description} 
-            onChange={handleInputChange} 
-            rows="13" 
-            cols="50" 
-            style={{ resize: "vertical" }} 
-          />
-        </label>
+      <form className="upload-form" onSubmit={handleSubmit}>
+        <label htmlFor="locid">Location ID:</label>
+        <input type="number" id="locid" name="locid" value={formData.locid} onChange={handleInputChange} />
 
-        <label>
-          Days Can Spend:
-          <input type="number" name="days" value={formData.days} onChange={handleInputChange} />
-        </label>
-        <label>
-          Budget:
-          <input type="number" name="budget" value={formData.budget} onChange={handleInputChange} />
-        </label>
-        <label>
-          Images:
-          <input type="file" name="images" multiple onChange={handleImageChange} />
-        </label>
+        <label htmlFor="locname">Location Name:</label>
+        <input type="text" id="locname" name="locname" value={formData.locname} onChange={handleInputChange} />
+
+        <label htmlFor="places">Places:</label>
+        <input type="text" id="places" name="places" value={formData.places} onChange={handleInputChange} />
+
+        <label htmlFor="description">Description:</label>
+        <textarea id="description" name="description" value={formData.description} onChange={handleInputChange} rows="8"></textarea>
+
+        <label htmlFor="days">Days Can Spend:</label>
+        <input type="number" id="days" name="days" value={formData.days} onChange={handleInputChange} />
+
+        <label htmlFor="budget">Budget:</label>
+        <input type="number" id="budget" name="budget" value={formData.budget} onChange={handleInputChange} />
+
+        <label htmlFor="images">Images:</label>
+        <input type="file" id="images" name="images" multiple onChange={handleImageChange} />
+
         <button type="submit">Submit</button>
       </form>
     </div>

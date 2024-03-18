@@ -1,8 +1,7 @@
-// Frontend code (React)
-
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import './GuidePlans.css'; // Import the CSS file
 
 function GuidePlans() {
   const navigate = useNavigate();
@@ -28,12 +27,6 @@ function GuidePlans() {
     });
   };
 
-  /**const handleImageChange = (e, field) => {
-    setFormData({
-      ...formData,
-      [field]: e.target.files
-    });
-  };**/
   const handleImageChange = (e, field) => {
     const filesArray = Array.from(e.target.files);
     setFormData({
@@ -41,7 +34,6 @@ function GuidePlans() {
       [field]: filesArray
     });
   };
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -67,15 +59,6 @@ function GuidePlans() {
         data.append('placesImages', formData.placesImages[i]);
       }
       
-    /**formData.hotelImages.forEach((image) => {
-      data.append('hotelImages', image);
-    });
-    formData.vehicleImages.forEach((image) => {
-      data.append('vehicleImages', image);
-    });
-    formData.placesImages.forEach((image) => {
-      data.append('placesImages', image);
-    });**/
     data.append('budget', formData.budget);
     try {
       await axios.post('http://localhost:5000/guideupload', data, {
@@ -91,24 +74,25 @@ function GuidePlans() {
   };
 
   return (
-    <div >
+    <div className="container-guideplans">
       <h1>Tour Plan Upload</h1>
       <form onSubmit={handleSubmit}>
-        <label>
+        <label className="label-guideplans">
           User Email:
-          <input type="email" name="userEmail" value={formData.userEmail} onChange={handleInputChange} />
+          <input className="input-guideplans" type="email" name="userEmail" value={formData.userEmail} onChange={handleInputChange} />
         </label>
-        <label>
+        <label className="label-guideplans">
           Guide Email:
-          <input type="email" name="guideEmail" value={formData.guideEmail} onChange={handleInputChange} />
+          <input className="input-guideplans" type="email" name="guideEmail" value={formData.guideEmail} onChange={handleInputChange} />
         </label>
-        <label>
+        <label className="label-guideplans">
           Location Name:
-          <input type="text" name="locname" value={formData.locname} onChange={handleInputChange} />
+          <input className="input-guideplans" type="text" name="locname" value={formData.locname} onChange={handleInputChange} />
         </label>
-        <label>
+        <label className="label-guideplans">
           Plan Details:
           <textarea 
+            className="textarea-guideplans" 
             name="planDetails" 
             value={formData.planDetails} 
             onChange={handleInputChange} 
@@ -117,35 +101,35 @@ function GuidePlans() {
             style={{ resize: "vertical" }} 
           />
         </label>
-        <label>
+        <label className="label-guideplans">
           Hotel Accommodation:
-          <input type="text" name="hotelAccommodation" value={formData.hotelAccommodation} onChange={handleInputChange} />
+          <input className="input-guideplans" type="text" name="hotelAccommodation" value={formData.hotelAccommodation} onChange={handleInputChange} />
         </label>
-        <label>
+        <label className="label-guideplans">
           Travel Vehicle Details:
-          <input type="text" name="travelVehicleDetails" value={formData.travelVehicleDetails} onChange={handleInputChange} />
+          <input className="input-guideplans" type="text" name="travelVehicleDetails" value={formData.travelVehicleDetails} onChange={handleInputChange} />
         </label>
-        <label>From Date</label><br/>
-        <input type= 'date' name="fromdate" placeholder="From Date" value={formData.fromdate} onChange={handleInputChange} required /><br/><br/>
-        <label>To Date</label><br/>
-        <input type= 'date' name="todate" placeholder="To Date" value={formData.todate} onChange={handleInputChange} required /><br/><br/>
-        <label>
+        <label className="label-guideplans">From Date</label><br/>
+        <input className="input-guideplans" type= 'date' name="fromdate" placeholder="From Date" value={formData.fromdate} onChange={handleInputChange} required /><br/><br/>
+        <label className="label-guideplans">To Date</label><br/>
+        <input className="input-guideplans" type= 'date' name="todate" placeholder="To Date" value={formData.todate} onChange={handleInputChange} required /><br/><br/>
+        <label className="label-guideplans">
           Budget:
-          <input type="number" name="budget" value={formData.budget} onChange={handleInputChange} />
+          <input className="input-guideplans" type="number" name="budget" value={formData.budget} onChange={handleInputChange} />
         </label>
-        <label>
+        <label className="label-guideplans">
           Hotel Images:
-          <input type="file" name="hotelImages" multiple onChange={(e) => handleImageChange(e, 'hotelImages')} />
+          <input className="input-guideplans" type="file" name="hotelImages" multiple onChange={(e) => handleImageChange(e, 'hotelImages')} />
         </label>
-        <label>
+        <label className="label-guideplans">
           Vehicle Images:
-          <input type="file" name="vehicleImages" multiple onChange={(e) => handleImageChange(e, 'vehicleImages')} />
+          <input className="input-guideplans" type="file" name="vehicleImages" multiple onChange={(e) => handleImageChange(e, 'vehicleImages')} />
         </label>
-        <label>
+        <label className="label-guideplans">
           Places Images:
-          <input type="file" name="placesImages" multiple onChange={(e) => handleImageChange(e, 'placesImages')} />
+          <input className="input-guideplans" type="file" name="placesImages" multiple onChange={(e) => handleImageChange(e, 'placesImages')} />
         </label>
-        <button type="submit">Submit</button>
+        <button className="button-guideplans" type="submit">Submit</button>
       </form>
     </div>
   );

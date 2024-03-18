@@ -1,0 +1,46 @@
+/* Styling for container */
+.manager-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Align items to the right side */
+  }
+  
+  /* Styling for user profile section */
+  .manager-profile {
+    background-color: #f2f2f2; /* Light grey */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Shadow effect */
+    margin-bottom: 20px; /* Add space below the user profile section */
+  }
+  .manager-profile h2{
+    color:rgb(103, 87, 8);
+  }
+  .manager-profile p {
+    margin: 5px 0; /* Adjust spacing */
+  }
+  
+  /* Styling for image */
+  .manager-photo img {
+    width: 100px; /* Adjust size as needed */
+    height: 100px; /* Adjust size as needed */
+    border-radius: 50%; /* Make it circular */
+    object-fit: cover; /* Ensure the photo fills the circle */
+    margin-bottom: 10px; /* Add space below the image */
+  }
+  
+  /* Styling for link */
+  .manager-link {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background-color: #25ede3; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+  }

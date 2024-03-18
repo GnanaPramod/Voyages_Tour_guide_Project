@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-//import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import './Guide.css'; // Import your CSS file for styling
+
 function GuideIntf() {
   const [userDetails, setUserDetails] = useState(null);
   const userEmail = localStorage.getItem('email'); // Retrieve the signed-in user's email from local storage
   const navigate = useNavigate();
+
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
@@ -18,37 +20,40 @@ function GuideIntf() {
 
     fetchUserDetails();
   }, [userEmail]);
-  function handleBtn(){
+
+  function handleBtn() {
     navigate("/usrtoinfo");
   }
-  function handlePlnBtn(){
+
+  function handlePlnBtn() {
     navigate("/guideplans");
   }
+
   return (
     <div>
-      <h2>User Profile</h2>
-      {userDetails && (
-        <div>
-          <p>Username: {userDetails.username}</p>
-          <p>Email: {userDetails.email}</p>
-          {/* Display other user details */}
-          {userDetails.profilePicture && (
-            <div>
-            {console.log('Profile Picture Path:', userDetails.profilePicture)}
+    <div className="guide-container">
+      <div className="guide-profile">
+        <h2>Guide Profile</h2>
+        {userDetails && (
+          <div>
             {userDetails.profilePicture && (
-  <div>
-    {console.log('Profile Picture Path:','http://localhost:5000/'+ userDetails.profilePicture)}
-    <img src={`http://localhost:5000/${userDetails.profilePicture.replace("uploads\\", "uploads/").replace(/\\/g, "/")}`} alt="Profile" />
-  </div>
-)}
-          <button onClick={handleBtn}>Get User Requirements</button>
-          <button onClick = {handlePlnBtn}>Send Plans</button>
+              <div className="guide-photo">
+                <img src={`http://localhost:5000/${userDetails.profilePicture.replace("uploads\\", "uploads/").replace(/\\/g, "/")}`} alt="Profile" />
+              </div>
+            )}
+            <div className="guide-info">
+              <p>Username: {userDetails.username}</p>
+              <p>Email: {userDetails.email}</p>
             </div>
-          )}
-        </div>
-      )}
-      
-    </div>
+          </div>
+        )}
+      </div>
+    </div>  
+      <div className="guide-buttons">
+        <button onClick={handleBtn}>Get User Requirements</button>
+        <button onClick={handlePlnBtn}>Send Plans</button>
+      </div>
+  </div>  
   );
 }
 

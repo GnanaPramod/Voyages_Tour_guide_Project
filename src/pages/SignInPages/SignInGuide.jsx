@@ -79,7 +79,7 @@ function SignInGuide() {
         <button type="submit">Sign In</button>
       </form>
       <button className="rst" onClick={handleResetPassword}>Reset Password</button>
-      {error && <div style={{ color: 'red' }}>{error}</div>}
+      {error && <div className="error-message" style={{ color: 'red' }}>{error}</div>}
     </div>
   );
 }

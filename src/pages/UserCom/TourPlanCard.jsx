@@ -11,7 +11,7 @@ function TourPlanCard(props) {
     <div>
       <h2>Tour Plan Details</h2>
       <p>User Email: {tourPlan.userEmail}</p>
-      <p>Guide Email: {tourPlan.guideEmail}</p>
+      <p>Guide Email: {tourPlan.guideEmail}</p>y
       <p>Location Name: {tourPlan.locname}</p>
       <p>Plan Details: {tourPlan.planDetails}</p>
       <p>From Date: {new Date(tourPlan.fromdate).toLocaleDateString()}</p>
@@ -43,6 +43,7 @@ function TourPlanCard(props) {
 export default TourPlanCard;**/
 import React, { useState } from 'react';
 import axios from 'axios'; // Import axios for making HTTP requests
+import './TourPlanCard.css'; // Import the CSS file
 
 function TourPlanCard(props) {
   const { tourPlan } = props; // Destructuring tourPlan from props
@@ -67,44 +68,46 @@ function TourPlanCard(props) {
     }
   };
 
+  // Split planDetails into day-wise paragraphs
+  const dayWiseDetails = tourPlan.planDetails.split('\n');
 
   return (
-    <div>
+    <div className="tour-plan-card">
       <h2>Tour Plan Details</h2>
       <p>User Email: {tourPlan.userEmail}</p>
       <p>Guide Email: {tourPlan.guideEmail}</p>
       <p>Location Name: {tourPlan.locname}</p>
-      <p>Plan Details: {tourPlan.planDetails}</p>
+      <div>
+        <h3>Plan Details:</h3>
+        {dayWiseDetails.map((detail, index) => (
+          <p key={index}>{detail}</p>
+        ))}
+      </div>
       <p>From Date: {new Date(tourPlan.fromdate).toLocaleDateString()}</p>
       <p>To Date: {new Date(tourPlan.todate).toLocaleDateString()}</p>
       <p>Hotel Accommodation: {tourPlan.hotelAccommodation}</p>
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+      <div className="image-container">
         {tourPlan.hotelImages && tourPlan.hotelImages.map((image, index) => (
-            <img key={index} src={`http://localhost:5000/uploads/${image}`} alt={`Vehicle Image ${index}`} style={{ width: '200px', height: 'auto', margin: '5px' }} />
+          <img key={index} src={`http://localhost:5000/uploads/${image}`} alt={`Hotel Image ${index}`} />
         ))}
       </div>
       <p>Travel Vehicle Details: {tourPlan.travelVehicleDetails}</p>
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+      <div className="image-container">
         {tourPlan.vehicleImages && tourPlan.vehicleImages.map((image, index) => (
-            <img key={index} src={`http://localhost:5000/uploads/${image}`} alt={`Vehicle Image ${index}`} style={{ width: '200px', height: 'auto', margin: '5px' }} />
-         ))}
+          <img key={index} src={`http://localhost:5000/uploads/${image}`} alt={`Vehicle Image ${index}`} />
+        ))}
       </div>
       <p>Budget: {tourPlan.budget}</p>
       <h3>Images:</h3>
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-        {tourPlan.placesImages &&  tourPlan.placesImages.map((image, index) => (
-            <img key={index} src={`http://localhost:5000/uploads/${image}`} alt={`Vehicle Image ${index}`} style={{ width: '200px', height: 'auto', margin: '5px' }} />
-         ))}
+      <div className="image-container">
+        {tourPlan.placesImages && tourPlan.placesImages.map((image, index) => (
+          <img key={index} src={`http://localhost:5000/uploads/${image}`} alt={`Place Image ${index}`} />
+        ))}
       </div>
-
-      
       {!confirmation && <button onClick={handleConfirm}>Confirm</button>}
-          {confirmation && <p>Tour plan confirmed and saved!</p>}
+      {confirmation && <p>Tour plan confirmed and saved!</p>}
     </div>
   );
 }
 
 export default TourPlanCard;
-
-
-

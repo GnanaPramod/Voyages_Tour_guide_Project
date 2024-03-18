@@ -1,0 +1,53 @@
+.guide-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+  .guide-profile {
+    background-color: #f7f6f4; /* Yellow */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Shadow effect */
+    margin-left: auto; /* Pushes it to the right */
+  }
+  
+  .guide-profile h2 {
+    margin-top: 0; /* Remove default margin */
+    color: rgb(248, 190, 74);
+  }
+  
+  .guide-photo img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .guide-info p {
+    margin: 5px 0;
+  }
+  .guide-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 20px;
+  }
+  
+  .guide-buttons button {
+    background-color: #2bc0da; /* Blue */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .guide-buttons button:first-child {
+    margin-top: 0;
+  }
+  
