@@ -1,0 +1,60 @@
+/* GuidePlans.css */
+
+.container-guideplans {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .container-guideplans h1 {
+    text-align: center;
+    color: #4e1e76;
+  }
+  
+  .container-guideplans form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .label-guideplans {
+    margin-bottom: 10px;
+    color: #4e1e76;
+  }
+  
+  .input-guideplans[type='email'],
+  .input-guideplans[type='text'],
+  .textarea-guideplans,
+  .input-guideplans[type='number'],
+  .input-guideplans[type='date'],
+  .input-guideplans[type='file'] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #e732bd;
+    border-radius: 10px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .input-guideplans:focus {
+    outline: none;
+    border-color: #893798;
+  }
+  
+  .button-guideplans[type='submit'] {
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #4e1e76;
+    color: white;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button-guideplans:hover {
+    background-color: #893798;
+  }
+  

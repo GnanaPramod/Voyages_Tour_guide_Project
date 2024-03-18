@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import './Manager.css'; // Import your CSS file for styling
 
 function MangrIntf() {
   const [userDetails, setUserDetails] = useState(null);
@@ -21,28 +22,26 @@ function MangrIntf() {
 
   return (
     <div>
-      <h2>User Profile</h2>
-      {userDetails && (
-        <div>
-          <p>Username: {userDetails.username}</p>
-          <p>Email: {userDetails.email}</p>
-          {/* Display other user details */}
+    <div className="manager-container">
+      <div className="manager-profile">
+        <h2>Manager Profile</h2>
+        {userDetails && (
+          <div>
           {userDetails.profilePicture && (
-            <div>
-            {console.log('Profile Picture Path:', userDetails.profilePicture)}
-            {userDetails.profilePicture && (
-  <div>
-    {console.log('Profile Picture Path:', userDetails.profilePicture)}
-    <img src={`http://localhost:5000/${userDetails.profilePicture.replace("uploads\\", "uploads/").replace(/\\/g, "/")}`} alt="Profile" />
-  </div>
-)}
-
-            </div>
-          )}
-        </div>
-      )}
-      <Link to="/manager/upload">Manager Uplaod</Link>
-    </div>
+              <div className="manager-photo">
+                <img src={`http://localhost:5000/${userDetails.profilePicture.replace("uploads\\", "uploads/").replace(/\\/g, "/")}`} alt="Profile" />
+              </div>
+           )}
+            <p>Username: {userDetails.username}</p>
+            <p>Email: {userDetails.email}</p>
+            {/* Display other user details */}
+           
+          </div>
+        )}
+      </div>
+    </div>  
+      <Link to="/manager/upload" className="manager-link">Manager Upload</Link>
+  </div>  
   );
 }
 

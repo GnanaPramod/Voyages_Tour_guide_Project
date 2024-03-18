@@ -202,9 +202,12 @@ function TourPlanDetails() {
 
 export default TourPlanDetails;**/
 
+// TourPlanDetails.js
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import TourPlanCard from './TourPlanCard.jsx'; // Importing the TourPlanCard component
+import './TourPlanDetails.css'; // Importing the CSS file
 
 function TourPlanDetails() {
   const [tourPlans, setTourPlans] = useState([]);
@@ -241,11 +244,11 @@ function TourPlanDetails() {
   }, [userEmail]);
 
   return (
-    <div>
-      <h1>All Tour Plan Details</h1>
+    <div className="tour-plan-details-container">
+      <h1 className="tour-plan-details-heading">All Tour Plan Details</h1>
       {tourPlans.length > 0 ? (
         tourPlans.map((tourPlan, index) => (
-          <div key={index}>
+          <div key={index} className="tour-plan-card-container">
             <TourPlanCard
               tourPlan={tourPlan}
               handleConfirm={handleConfirm}
@@ -254,12 +257,13 @@ function TourPlanDetails() {
           </div>
         ))
       ) : (
-        <p>No tour plans found.</p>
+        <p className="no-tour-plans-message">No tour plans found.</p>
       )}
     </div>
   );
 }
 
 export default TourPlanDetails;
+
 
 
