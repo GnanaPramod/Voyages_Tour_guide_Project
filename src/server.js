@@ -52,6 +52,7 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
   name: String,
+  mobileno:String,
   profilePicture: String,
 });
 const MgrSchema = new mongoose.Schema({
@@ -68,6 +69,7 @@ const GuideSchema = new mongoose.Schema({
   password: { type: String, required: true },
   locname: { type: String, required: true },
   name: { type: String },
+  mobileno:{type: String},
   profilePicture: { type: String },
   guideid: { type: String, required: true }
 });
@@ -194,7 +196,61 @@ app.get('/fetchTourPlan/:userEmail', async (req, res) => {
   }
 });
 // Define route to fetch all tour plans associated with a specific user email
+// API to fetch details based on userEmail
+// API to fetch confirmation details based on user email
+/**app.get('/confirmation/:userEmail', async (req, res) => {
+  try {
+    const { userEmail } = req.params;
+    const confirmations = await ConfirmedDetails.find({ userEmail });
+    res.json(confirmations);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});**/
+app.get('/confirmation/:userEmail', async (req, res) => {
+  try {
+    const { userEmail } = req.params;
+    const confirmations = await ConfirmedDetails.find({ userEmail });
 
+    // Extract guide emails from all confirmations
+    const guideEmails = confirmations.map(confirmation => confirmation.guideEmail);
+
+    // Fetch guide details for each guide email
+    const guideDetails = await Guide.find({ email: { $in: guideEmails } });
+
+    // Combine confirmation and guide details
+    const combinedDetails = {
+      confirmations: confirmations,
+      guideDetails: guideDetails
+    };
+
+    res.json(combinedDetails);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+app.get('/confirmationguide/:guideEmail', async (req, res) => {
+  try {
+    const { guideEmail } = req.params;
+    const confirmations = await ConfirmedDetails.find({ guideEmail });
+
+    // Extract guide emails from all confirmations
+    const userEmails = confirmations.map(confirmation => confirmation.userEmail);
+
+    // Fetch guide details for each guide email
+    const userDetails = await User.find({ email: { $in: userEmails } });
+
+    // Combine confirmation and guide details
+    const combinedDetails = {
+      confirmations: confirmations,
+      userDetails: userDetails
+    };
+
+    res.json(combinedDetails);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 const transporter = nodemailer.createTransport({
   service: 'Gmail',
@@ -205,7 +261,7 @@ const transporter = nodemailer.createTransport({
   });
 app.post('/signup', upload.single('profilePicture'), async (req, res) => {
   try {
-    const { username, email, password, name } = req.body;
+    const { username, email, password, name, mobileno } = req.body;
 
     // Basic validation
     if (!username || !email || !password) {
@@ -224,6 +280,7 @@ app.post('/signup', upload.single('profilePicture'), async (req, res) => {
       email,
       password,
       name,
+      mobileno,
       profilePicture: req.file ? req.file.filename : '' // Save only the filename in the database
     });
 
@@ -320,7 +377,7 @@ app.post('/signup', upload.single('profilePicture'), async (req, res) => {
     });
   app.post('/guidesignup', upload.single('profilePicture'), async (req, res) => {
     try {
-      const { username, email, password, locname, name, guideid } = req.body;
+      const { username, email, password, locname, name, mobileno, guideid } = req.body;
       if (guideid !== '1445') {
         return res.status(400).json({ message: 'Invalid guide ID' });
       }
@@ -343,6 +400,7 @@ app.post('/signup', upload.single('profilePicture'), async (req, res) => {
         password,
         locname,
         name,
+        mobileno,
         guideid,
         profilePicture: req.file ? req.file.path : ''
       });
@@ -371,6 +429,20 @@ app.post('/signup', upload.single('profilePicture'), async (req, res) => {
       res.status(500).json({ message: 'Internal server error' });
     }
   });
+  const transporter6 = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+        user: 'projectplazapro@gmail.com', // Your Gmail email address
+        pass: 'bynw qsyz fbqy guvq' // Your Gmail password
+      }
+    });
+  const transporter7 = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+        user: 'projectplazapro@gmail.com', // Your Gmail email address
+        pass: 'bynw qsyz fbqy guvq' // Your Gmail password
+      }
+    });
  // Define route to confirm tour plan details
 app.post('/confirmTourPlan', async (req, res) => {
   try {
@@ -388,7 +460,33 @@ app.post('/confirmTourPlan', async (req, res) => {
 
     // Save confirmed tour plan to database
     await confirmedDetails.save();
-
+    // Send confirmation email
+    const mailOptions = {
+      from: 'projectplazapro@gmail.com',
+      to: userEmail,
+      subject: 'Welcome to MyApp!',
+      text: `Dear customer,\n\nThank you for confirming the plan and details well be sent through webssite please go throught it!.`
+    };
+    const mailOptions1 = {
+      from: 'projectplazapro@gmail.com',
+      to: userEmail,
+      subject: 'Welcome to MyApp!',
+      text: `Dear Guide,\n\n One User has confirmed your plan, please visit Voyages Website for further details.`
+    };
+    transporter6.sendMail(mailOptions, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
+    transporter7.sendMail(mailOptions1, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
     // Delete remaining tour plan details based on user email
     // Note: Change 'TourPlan' to the appropriate model name if it's different
     //await TourPlan.deleteMany({ userEmail });

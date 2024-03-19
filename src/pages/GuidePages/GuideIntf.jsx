@@ -5,13 +5,16 @@ import './Guide.css'; // Import your CSS file for styling
 
 function GuideIntf() {
   const [userDetails, setUserDetails] = useState(null);
-  const userEmail = localStorage.getItem('email'); // Retrieve the signed-in user's email from local storage
+  const userEmail = localStorage.getItem('email'); 
+  const [guideemail, setGuideEmail] = useState(userEmail);
+  // Retrieve the signed-in user's email from local storage
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/guide/profile/${userEmail}`); // Pass the user's email as part of the request
+        setGuideEmail(userEmail);
+        const response = await axios.get(`http://localhost:5000/guide/profile/${guideemail}`); // Pass the user's email as part of the request
         setUserDetails(response.data);
       } catch (error) {
         console.error('Error fetching user details:', error);
@@ -28,7 +31,9 @@ function GuideIntf() {
   function handlePlnBtn() {
     navigate("/guideplans");
   }
-
+  function handleConfirmBtn(){
+    navigate("/confirmedusrguideplan");
+  }
   return (
     <div>
     <div className="guide-container">
@@ -44,6 +49,7 @@ function GuideIntf() {
             <div className="guide-info">
               <p>Username: {userDetails.username}</p>
               <p>Email: {userDetails.email}</p>
+              <p>Mobile number: {userDetails.mobileno}</p>
             </div>
           </div>
         )}
@@ -52,6 +58,7 @@ function GuideIntf() {
       <div className="guide-buttons">
         <button onClick={handleBtn}>Get User Requirements</button>
         <button onClick={handlePlnBtn}>Send Plans</button>
+        <button onClick={handleConfirmBtn}>Confirmed User Details</button>
       </div>
   </div>  
   );

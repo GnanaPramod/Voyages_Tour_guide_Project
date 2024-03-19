@@ -9,7 +9,9 @@ function UsrSigUp() {
     username: '',
     email: '',
     password: '',
+    mobileno: '',
     name: '',
+   
     profilePicture: null
   });
   const [error, setError] = useState('');
@@ -47,7 +49,9 @@ function UsrSigUp() {
     formDataToSend.append('username', formData.username);
     formDataToSend.append('email', formData.email);
     formDataToSend.append('password', formData.password);
+    formDataToSend.append('mobileno', formData.mobileno);
     formDataToSend.append('name', formData.name);
+    
     formDataToSend.append('profilePicture', formData.profilePicture);
 
     try {
@@ -73,7 +77,9 @@ function UsrSigUp() {
         <input type="text" name="username" placeholder="Username" value={formData.username} onChange={handleChange} /><br/>
         <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} /><br/>
         <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} /><br/>
-        <input type="text" name="name" placeholder="Name (Optional)" value={formData.name} onChange={handleChange} /><br/>
+        
+        <input type="text" name="name" placeholder="Name " value={formData.name} onChange={handleChange} /><br/>
+        <input type="text" name="mobileno" placeholder="Mobile number" value={formData.mobileno} onChange={handleChange} /><br/>
         <input type="file" name="profilePicture" onChange={handleFileChange} /><br/>
        </div> 
         <button type="submit">Sign Up</button>
