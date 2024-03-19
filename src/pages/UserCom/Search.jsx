@@ -43,13 +43,16 @@ import './Search.css'; // Import your CSS file for styling
 
 function Search() {
   const [userDetails, setUserDetails] = useState(null);
-  const userEmail = localStorage.getItem('email'); // Retrieve the signed-in user's email from local storage
+  const userEmail = localStorage.getItem('email');
+  const [usrEmail, setUsrEmail] = useState(userEmail);
+   // Retrieve the signed-in user's email from local storage
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/user/profile/${userEmail}`); // Pass the user's email as part of the request
+        setUsrEmail(userEmail);
+        const response = await axios.get(`http://localhost:5000/user/profile/${usrEmail}`); // Pass the user's email as part of the request
         setUserDetails(response.data);
         localStorage.setItem('email', userDetails.email);
       } catch (error) {
@@ -72,7 +75,9 @@ function Search() {
   function handleTourBtn() {
     navigate('/tourpage');
   }
-
+  function handleconfirmBtn(){
+    navigate('/confirmeddetails');
+  }
   return (
     <div>
       <div className="user-profile">
@@ -87,6 +92,7 @@ function Search() {
               <h2>User Profile</h2>
               <p>Username: {userDetails.username}</p>
               <p>Email: {userDetails.email}</p>
+              <p>Mobile no:{userDetails.mobileno}</p>
             </div>
           </div>
         )}
@@ -95,6 +101,7 @@ function Search() {
       <button className="u1" onClick={handleBtn}>Search Locations</button>
       <button className="u2"onClick={handlePlnBtn}>Get Plan Details</button>
       <button className="u3"onClick={handleTourBtn}>Get Guide</button>
+      <button onClick={handleconfirmBtn}>Confirmed Tour Details</button>
     </div>
   );
 }
