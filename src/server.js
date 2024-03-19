@@ -466,21 +466,17 @@ app.post('/confirmTourPlan', async (req, res) => {
       from: 'projectplazapro@gmail.com',
       to: userEmail,
       subject: 'Welcome to MyApp!',
-<<<<<<< HEAD
+
       text: `Dear ${custname.username},\n\nThank you for confirming the plan and details well be sent through webssite please go throught it!.`
-=======
-      text: `Dear customer,\n\nThank you for confirming the plan and details well be sent through webssite please go throught it!.`
->>>>>>> 228482650cdd06f6a5eb21f5e6990d948dcd780a
+
     };
     const mailOptions1 = {
       from: 'projectplazapro@gmail.com',
       to: userEmail,
       subject: 'Welcome to MyApp!',
-<<<<<<< HEAD
+
       text: `Dear ${guidename.username},\n\n One User has confirmed your plan, please visit Voyages Website for further details.`
-=======
-      text: `Dear Guide,\n\n One User has confirmed your plan, please visit Voyages Website for further details.`
->>>>>>> 228482650cdd06f6a5eb21f5e6990d948dcd780a
+
     };
     transporter6.sendMail(mailOptions, function(error, info){
       if (error) {
