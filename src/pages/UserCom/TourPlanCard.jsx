@@ -44,7 +44,7 @@ export default TourPlanCard;**/
 import React, { useState } from 'react';
 import axios from 'axios'; // Import axios for making HTTP requests
 import './TourPlanCard.css'; // Import the CSS file
-
+import ImageSliderLocation from '../TourPageCompenent/ImageSliderLocation';
 function TourPlanCard(props) {
   const { tourPlan } = props; // Destructuring tourPlan from props
 
@@ -77,6 +77,8 @@ function TourPlanCard(props) {
       <p>User Email: {tourPlan.userEmail}</p>
       <p>Guide Email: {tourPlan.guideEmail}</p>
       <p>Location Name: {tourPlan.locname}</p>
+      <h3>Images:</h3>
+      <ImageSliderLocation slides={tourPlan.placesImages.map(image => ({ url: `http://localhost:5000/uploads/${image}` }))} />
       <div>
         <h3>Plan Details:</h3>
         {dayWiseDetails.map((detail, index) => (
@@ -86,24 +88,14 @@ function TourPlanCard(props) {
       <p>From Date: {new Date(tourPlan.fromdate).toLocaleDateString()}</p>
       <p>To Date: {new Date(tourPlan.todate).toLocaleDateString()}</p>
       <p>Hotel Accommodation: {tourPlan.hotelAccommodation}</p>
-      <div className="image-container">
-        {tourPlan.hotelImages && tourPlan.hotelImages.map((image, index) => (
-          <img key={index} src={`http://localhost:5000/uploads/${image}`} alt={`Hotel Image ${index}`} />
-        ))}
-      </div>
+      <ImageSliderLocation slides={tourPlan.hotelImages.map(image => ({ url: `http://localhost:5000/uploads/${image}` }))} />
+      
       <p>Travel Vehicle Details: {tourPlan.travelVehicleDetails}</p>
-      <div className="image-container">
-        {tourPlan.vehicleImages && tourPlan.vehicleImages.map((image, index) => (
-          <img key={index} src={`http://localhost:5000/uploads/${image}`} alt={`Vehicle Image ${index}`} />
-        ))}
-      </div>
+      <ImageSliderLocation slides={tourPlan.vehicleImages.map(image => ({ url: `http://localhost:5000/uploads/${image}` }))} />
+      
       <p>Budget: {tourPlan.budget}</p>
-      <h3>Images:</h3>
-      <div className="image-container">
-        {tourPlan.placesImages && tourPlan.placesImages.map((image, index) => (
-          <img key={index} src={`http://localhost:5000/uploads/${image}`} alt={`Place Image ${index}`} />
-        ))}
-      </div>
+      
+      
       {!confirmation && <button onClick={handleConfirm}>Confirm</button>}
       {confirmation && <p>Tour plan confirmed and saved!</p>}
     </div>
@@ -111,3 +103,22 @@ function TourPlanCard(props) {
 }
 
 export default TourPlanCard;
+
+
+/**<div className="image-container">
+        {tourPlan.hotelImages && tourPlan.hotelImages.map((image, index) => (
+          <img key={index} src={`http://localhost:5000/uploads/${image}`} alt={`Hotel Image ${index}`} />
+        ))}
+      </div>
+
+<div className="image-container">
+        {tourPlan.vehicleImages && tourPlan.vehicleImages.map((image, index) => (
+          <img key={index} src={`http://localhost:5000/uploads/${image}`} alt={`Vehicle Image ${index}`} />
+        ))}
+      </div>
+<div className="image-container">
+        {tourPlan.placesImages && tourPlan.placesImages.map((image, index) => (
+          <img key={index} src={`http://localhost:5000/uploads/${image}`} alt={`Place Image ${index}`} />
+        ))}
+      </div>
+      **/

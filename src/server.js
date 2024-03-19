@@ -448,7 +448,8 @@ app.post('/confirmTourPlan', async (req, res) => {
   try {
     // Extract details from request body
     const { userEmail, guideEmail, locname, fromDate, toDate } = req.body;
-
+    const guidename = Guide.findOne({email: guideEmail});
+    const custname = User.findOne({email: userEmail});
     // Create new confirmed tour plan document
     const confirmedDetails = new ConfirmedDetails({
       userEmail,
@@ -465,13 +466,17 @@ app.post('/confirmTourPlan', async (req, res) => {
       from: 'projectplazapro@gmail.com',
       to: userEmail,
       subject: 'Welcome to MyApp!',
-      text: `Dear customer,\n\nThank you for confirming the plan and details well be sent through webssite please go throught it!.`
+
+      text: `Dear ${custname.username},\n\nThank you for confirming the plan and details well be sent through webssite please go throught it!.`
+
     };
     const mailOptions1 = {
       from: 'projectplazapro@gmail.com',
       to: userEmail,
       subject: 'Welcome to MyApp!',
-      text: `Dear Guide,\n\n One User has confirmed your plan, please visit Voyages Website for further details.`
+
+      text: `Dear ${guidename.username},\n\n One User has confirmed your plan, please visit Voyages Website for further details.`
+
     };
     transporter6.sendMail(mailOptions, function(error, info){
       if (error) {
