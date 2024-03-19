@@ -28,6 +28,8 @@ import TourPageloc from './pages/TourPageCompenent/TourPageloc.jsx';
 import GuideUsrInfo from './pages/GuidePages/GuideUsrInfo.jsx';
 import GuidePlans from './pages/GuidePages/GuidePlans.jsx';
 import TourPlanDetails from './pages/UserCom/TourPlanDetails.jsx';
+import ConfirmedPlanDetails from './pages/UserCom/ConfirmedPlanDetails.jsx';
+import ConfirmedUsrGuidePlan from './pages/GuidePages/ConfirmedUsrGuidePlan.jsx';
 const router = createBrowserRouter([
    {
       path:"/",
@@ -36,6 +38,14 @@ const router = createBrowserRouter([
    {
       path:"/about",
       element: <About/>
+   },
+   {
+      path:"/confirmeddetails",
+      element:<ConfirmedPlanDetails/>
+   },
+   {
+      path:"/confirmedusrguideplan",
+      element:<ConfirmedUsrGuidePlan/>
    },
    {
       path:"/usrtoinfo",

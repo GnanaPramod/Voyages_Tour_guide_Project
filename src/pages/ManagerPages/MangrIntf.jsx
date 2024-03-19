@@ -5,12 +5,15 @@ import './Manager.css'; // Import your CSS file for styling
 
 function MangrIntf() {
   const [userDetails, setUserDetails] = useState(null);
-  const userEmail = localStorage.getItem('email'); // Retrieve the signed-in user's email from local storage
+  const userEmail = localStorage.getItem('email');
+  const [mgremail, setMgrEmail] = useState(userEmail);
+   // Retrieve the signed-in user's email from local storage
 
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/mgr/profile/${userEmail}`); // Pass the user's email as part of the request
+        setMgrEmail(userEmail)
+        const response = await axios.get(`http://localhost:5000/mgr/profile/${mgremail}`); // Pass the user's email as part of the request
         setUserDetails(response.data);
       } catch (error) {
         console.error('Error fetching user details:', error);
