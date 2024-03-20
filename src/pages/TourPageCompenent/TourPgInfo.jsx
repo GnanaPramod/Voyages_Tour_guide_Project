@@ -43,14 +43,17 @@ function TourPgInfo() {
 }
 
 export default TourPgInfo;**/
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Places from '../../components/Places.jsx';
+import './TourPgInfo.css';
 
 function TourPgInfo() {
   const [tours, setTours] = useState([]);
   const [error, setError] = useState(null);
   const [searchValue, setSearchValue] = useState('');
+
   useEffect(() => {
     axios.get('http://localhost:5000/tours')
       .then(response => {
@@ -60,46 +63,42 @@ function TourPgInfo() {
         setError(error.message);
       });
   }, []);
+
   const handleSearch = () => {
     const filteredTours = tours.filter(tour => tour.locname.toLowerCase().includes(searchValue.toLowerCase()));
     setTours(filteredTours);
   };
+
   return (
-    <div>
+    <div className="tour-page">
       <h1>Tours</h1>
-      <div>
-        <input type="text" value={searchValue} onChange={e => setSearchValue(e.target.value)} placeholder="Search by location name" />
+      <div className="search-bar">
+        <input
+          type="text"
+          value={searchValue}
+          onChange={e => setSearchValue(e.target.value)}
+          placeholder="Search by location name"
+        />
         <button onClick={handleSearch}>Search</button>
       </div>
       {error && <p>Error: {error}</p>}
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-  {tours.map(tour => (
-    <div key={tour.id} style={{ flex: '0 0 0 calc(0% - 0px)', margin: '1px' }}>
-      {tour.images.length > 0 ? (
-        <Places
-          img={`http://localhost:5000/uploads/${tour.images[0]}`}  // Using the first image from the array
-          name={tour.locname}
-          info={' '}
-        />
-      ) : (
-        <p>No image available</p>
-      )}
-    </div>
-  ))}
-</div>
+      <div className="tour-container">
+        {tours.map(tour => (
+          <div key={tour.id} className="tour-card">
+            {tour.images.length > 0 ? (
+              <Places
+                img={`http://localhost:5000/uploads/${tour.images[0]}`}  // Using the first image from the array
+                name={tour.locname}
+                info={' '}
+              />
+            ) : (
+              <p>No image available</p>
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
 
-
 export default TourPgInfo;
-
-/**{tour.images.map((image, index) => (
-  index === 0 && (
-    <Places
-      img={image}
-      name={tour.locname}
-      info={tour.places}
-    />
-  )
-))}**/

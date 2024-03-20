@@ -99,9 +99,9 @@ function Search() {
       </div>
 
       <button className="u1" onClick={handleBtn}>Search Locations</button>
-      <button className="u2"onClick={handlePlnBtn}>Get Plan Details</button>
-      <button className="u3"onClick={handleTourBtn}>Get Guide</button>
-      <button onClick={handleconfirmBtn}>Confirmed Tour Details</button>
+      <button className="u2" onClick={handlePlnBtn}>Get Plan Details</button>
+      <button className="u3" onClick={handleTourBtn}>Get Guide</button>
+      <button className="u4" onClick={handleconfirmBtn}>Confirmed Tour Details</button>
     </div>
   );
 }

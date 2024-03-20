@@ -74,11 +74,11 @@ function SignInUser() {
       />
     
     </div>  
-      <button type="button" onClick={handleTogglePasswordVisibility}>
+      <button className="size"type="button" onClick={handleTogglePasswordVisibility}>
         {formData.showPassword ? "Hide" : "Show"}
       </button>
       <br />
-      <button type="submit">Sign In</button>
+      <button className='size' type="submit">Sign In</button>
     </form>
     <button className="rst" onClick={handleResetPassword}>Reset Password</button>
     {error && <div className="error">{error}</div>}
