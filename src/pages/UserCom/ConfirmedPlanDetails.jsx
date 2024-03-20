@@ -47,7 +47,7 @@ function ConfirmedPlanDetails() {
 export default ConfirmedPlanDetails;**/
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './Search.css'; // Import your CSS file for styling
+import './CPD.css'; // Import your CSS file for styling
 
 function ConfirmedPlanDetails() {
   const [details, setDetails] = useState([]);
@@ -67,28 +67,26 @@ function ConfirmedPlanDetails() {
   }, [userEmail]);
 
   return (
-    <div>
-      <div className="details-container">
-        <h2>Confirmed Plan Details</h2>
-        <ul>
-          {details.confirmations && details.confirmations.map((confirmation, index) => (
-            <li key={index}>
-              <p>User Email: {confirmation.userEmail}</p>
-              <p>Guide Email: {confirmation.guideEmail}</p>
-              <p>Location Name: {confirmation.locname}</p>
-              <p>From Date: {confirmation.fromDate}</p>
-              <p>To Date: {confirmation.toDate}</p>
-              {details.guideDetails && details.guideDetails[index] && (
-                <div>
-                  <p>Guide Name: {details.guideDetails[index].username}</p>
-                  <p>Guide Email: {details.guideDetails[index].email}</p>
-                  <p>Guide Mobile: {details.guideDetails[index].mobileno}</p>
-                </div>
-              )}
-            </li>
-          ))}
-        </ul>
-      </div>
+    <div className="confirmed-plan-container">
+      <h2>Confirmed Plan Details</h2>
+      <ul>
+        {details.confirmations && details.confirmations.map((confirmation, index) => (
+          <li key={index} className="confirmation-item">
+            <p>User Email: {confirmation.userEmail}</p>
+            <p>Guide Email: {confirmation.guideEmail}</p>
+            <p>Location Name: {confirmation.locname}</p>
+            <p>From Date: {confirmation.fromDate}</p>
+            <p>To Date: {confirmation.toDate}</p>
+            {details.guideDetails && details.guideDetails[index] && (
+              <div className="guide-details">
+                <p>Guide Name: {details.guideDetails[index].username}</p>
+                <p>Guide Email: {details.guideDetails[index].email}</p>
+                <p>Guide Mobile: {details.guideDetails[index].mobileno}</p>
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

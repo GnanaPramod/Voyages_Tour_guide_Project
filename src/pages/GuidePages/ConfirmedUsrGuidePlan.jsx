@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-//import './Search.css'; // Import your CSS file for styling
+import './CUGP.css';
 
 function ConfirmedUsrGuidePlan() {
   const [details, setDetails] = useState([]);
@@ -21,18 +21,18 @@ function ConfirmedUsrGuidePlan() {
 
   return (
     <div>
-      <div className="details-container">
+      <div className="confirmed-usr-guide">
         <h2>Confirmed Plan Details</h2>
         <ul>
           {details.confirmations && details.confirmations.map((confirmation, index) => (
-            <li key={index}>
+            <li key={index} className="gu-confirmation">
               <p>User Email: {confirmation.userEmail}</p>
               <p>Guide Email: {confirmation.guideEmail}</p>
               <p>Location Name: {confirmation.locname}</p>
               <p>From Date: {confirmation.fromDate}</p>
               <p>To Date: {confirmation.toDate}</p>
               {details.userDetails && details.userDetails[index] && (
-                <div>
+                <div className="gu-details">
                   <p>User Name: {details.userDetails[index].username}</p>
                   <p>User Email: {details.userDetails[index].email}</p>
                   <p>User Mobile: {details.userDetails[index].mobileno}</p>

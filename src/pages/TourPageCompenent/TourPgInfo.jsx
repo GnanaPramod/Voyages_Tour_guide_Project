@@ -70,7 +70,7 @@ function TourPgInfo() {
   };
 
   return (
-    <div className="tour-page">
+    <div className="tour-page-info">
       <h1>Tours</h1>
       <div className="search-bar">
         <input

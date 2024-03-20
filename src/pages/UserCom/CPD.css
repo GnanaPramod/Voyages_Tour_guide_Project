@@ -1,0 +1,46 @@
+/* CPD.css */
+
+.confirmed-plan-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 700px; /* Adjust the maximum width as needed */
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background-color: #fffffe;
+    margin: auto; /* Center horizontally */
+    margin-top: 10vh; /* Center vertically with a top margin */
+  }
+  
+  .confirmed-plan-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color:rgb(187, 110, 238)
+  }
+  
+  .confirmed-plan-container ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .confirmation-item {
+    border-bottom: 1px solid #f5b9b9;
+    padding: 10px 0;
+  }
+  
+  .confirmation-item:last-child {
+    border-bottom: none;
+  }
+  
+  .confirmation-item p {
+    margin: 5px 0;
+  }
+  
+  .guide-details {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+  }
+  

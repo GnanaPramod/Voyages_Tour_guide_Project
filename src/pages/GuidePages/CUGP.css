@@ -1,0 +1,46 @@
+/* CPD.css */
+
+.confirmed-usr-guide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 700px; /* Adjust the maximum width as needed */
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background-color: #fffffe;
+    margin: auto; /* Center horizontally */
+    margin-top: 10vh; /* Center vertically with a top margin */
+  }
+  
+  .confirmed-usr-guide h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color:rgb(187, 110, 238)
+  }
+  
+  .confirmed-usr-gui ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .gu-confirmation {
+    border-bottom: 1px solid #f5b9b9;
+    padding: 10px 0;
+  }
+  
+  .gu-confirmation:last-child {
+    border-bottom: none;
+  }
+  
+  .gu-confirmation p {
+    margin: 5px 0;
+  }
+  
+  .gu-details {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+  }
+  
