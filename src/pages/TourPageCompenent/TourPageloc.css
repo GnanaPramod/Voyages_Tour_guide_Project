@@ -1,0 +1,46 @@
+/* Styling for TourPageloc component */
+.tour-page {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display:flex;
+    flex-direction: column;
+    text-align: center;
+    width:900px;
+    margin:0 auto;
+  }
+  
+  .tour-page h2 {
+    margin-bottom: 10px;
+    color: #bb68fa;
+    text-align: center;
+  }
+  
+  .des{
+    color:rgb(96, 28, 243)
+  }
+  
+  .tour-page .get-guide-button {
+    padding: 10px 20px;
+    background-color: #4e1e76;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100px;
+    margin-left:380px;
+  }
+  
+  .tour-page .get-guide-button:hover {
+    background-color: #893798;
+  }
+  
+  .tour-page.error {
+    color: red;
+  }
+  
+  .tour-page.loading {
+    color: #777;
+  }
+  
