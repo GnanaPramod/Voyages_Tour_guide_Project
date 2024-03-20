@@ -35,25 +35,35 @@
     outline: none;
     border-color: #893798;
   }
-  
-  .sign-in-user button {
-    padding:20px;
+  .size{
+    padding-left:150px;
+    padding-right:150px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     text-align: left;
-
     margin-top: 10px;
     border: none;
     border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
-  
   .sign-in-user button:hover {
     background-color: #4CAF50;
     color: #fff;
   }
-  .rst{
-    margin-left: 680px;
-  }
+ .rst{
+  margin-top: 10px;
+  border: none;
+  padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    padding-left: 120px;
+    padding-right:120px;
+    position:relative;
+    margin-left:575px;
+ } 
   
   .error {
     color: red;

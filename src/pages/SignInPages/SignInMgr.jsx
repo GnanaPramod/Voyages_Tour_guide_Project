@@ -72,12 +72,12 @@ function SignInMgr() {
           onChange={handleChange} 
         />
         </div>
-        <button type="button" onClick={handleTogglePasswordVisibility}>
+        <button className="mnr" type="button" onClick={handleTogglePasswordVisibility}>
           {formData.showPassword ? "Hide" : "Show"}
         </button><br/>
-        <button type="submit">Sign In</button>
+        <button className="mnr" type="submit">Sign In</button>
       </form>
-      <button className="rst" onClick={handleResetPassword}>Reset Password</button>
+      <button className="rst-mn" onClick={handleResetPassword}>Reset Password</button>
       {error && <div className="error-message" style={{ color: 'red' }}>{error}</div>}
     </div>
   );
