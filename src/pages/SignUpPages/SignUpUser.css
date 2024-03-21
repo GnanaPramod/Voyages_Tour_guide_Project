@@ -57,7 +57,13 @@
     text-align: center;
     margin-top: 10px;
   }
-  
+  .uu{
+    display: flex;
+    flex-direction: column;
+  }
+  .uu1,.uu2{
+    width:310px;
+  }
   .success {
     color: green;
     text-align: center;

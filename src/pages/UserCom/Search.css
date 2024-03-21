@@ -1,8 +1,21 @@
-.user-profile {
+/**.user-profile {
+  position: absolute;
+  right:10px;
+  height:200px;
+}**/
+.butor{
+  display:flex;
+  flex-direction: column;
+ 
+  width:600px;
+  height:200px;
   position: relative;
+  left:15px;
 }
-
 .user-details {
+  position:absolute;
+  right:10px;
+  height:100%;
   display: flex;
   align-items: center;
   background-color: #fcf8f8; /* Light grey */
@@ -12,6 +25,9 @@
   }
 
 .user-photo img {
+  position:absolute;
+  left: 80px;
+  top:190px;
   width: 100px; /* Adjust size as needed */
   height: 100px; /* Adjust size as needed */
   border-radius: 50%; /* Make it circular */
@@ -25,26 +41,35 @@
   margin-top: 10px; /* Adjust spacing */
 }
 .user-info p {
-     margin:5px 0;
+  position:relative;
+  top:0px;
+  margin:5px 0;
 }
 .user-info h2{
+  position:absolute;
+  left:50px;
+  top:140px;
   color: #af7a4c; /* Green */
   margin-bottom: 10px; /* Adjust spacing */
 }
 /* Position the user profile at the top right corner */
-.user-profile {
+/**.user-profile {
   position: absolute;
   top: 10px;
   right: 10px;
   margin: bottom 20px;
-}
-.u1,.u2,.u3,.u4{
+  height:100%;
+}**/
+/**.u1,.u2,.u3,.u4,.u5,.u6{
   display:flex;
   flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between; 
+  position: relative;
   background-color: #7fc1e7; 
   border: none;
   color: white;
-  padding: 15px 32px;
+  padding: 50px 50px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -52,5 +77,50 @@
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 5px;
-}
   
+}**/
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Centers the buttons horizontally */
+}
+
+.u1, .u2, .u3 {
+  position:relative;
+  top:12px;
+  left:10px;
+  border: none;
+  background-color: #7fc1e7;
+  color: white;
+  padding: 90px 90px;  
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 6px 4px;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 400px; /* Set the width of each button */
+  height: 400px; /* Set the height of each button */
+  box-sizing: border-box;
+}
+
+ .u4, .u5, .u6,.u7 {
+  position:relative;
+  bottom:633px;
+  left:500px;
+  background-color: #7fc1e7;
+  border: none;
+  color: white;
+  padding: 90px 90px;
+  text-align: center;
+  text-decoration: none;
+  
+  font-size: 16px;
+  margin: 6px 4px;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 400px; /* Set the width of each button */
+  height: 50%; /* Set the height of each button */
+  box-sizing: border-box;
+}
+

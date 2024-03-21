@@ -50,6 +50,13 @@
   .sign-up-mgr button:hover {
     background-color: #1be11b;
   }
+  .mgs{
+    display: flex;
+    flex-direction: column;
+  }
+  .mgs1,.mgs2{
+    width:310px;
+  }
   
   .error {
     color: red;

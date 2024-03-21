@@ -82,8 +82,10 @@ function UsrSigUp() {
         <input type="text" name="mobileno" placeholder="Mobile number" value={formData.mobileno} onChange={handleChange} /><br/>
         <input type="file" name="profilePicture" onChange={handleFileChange} /><br/>
        </div> 
-        <button type="submit">Sign Up</button>
-        <button type = "submit" onClick={handleSignInClick}>Sign In</button>
+       <div className="uu">
+        <button className="uu1"type="submit">Sign Up</button>
+        <button className="uu2" type = "submit" onClick={handleSignInClick}>Sign In</button>
+       </div> 
         {error && <div style={{ color: 'red' }}>{error}</div>}
         {successMessage && <div style={{ color: 'green' }}>{successMessage}</div>}
       </form>

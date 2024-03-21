@@ -30,6 +30,10 @@ import GuidePlans from './pages/GuidePages/GuidePlans.jsx';
 import TourPlanDetails from './pages/UserCom/TourPlanDetails.jsx';
 import ConfirmedPlanDetails from './pages/UserCom/ConfirmedPlanDetails.jsx';
 import ConfirmedUsrGuidePlan from './pages/GuidePages/ConfirmedUsrGuidePlan.jsx';
+import ComplaintForm from './pages/UserCom/ComplaintForm.jsx';
+import Managercomp from './pages/ManagerPages/Managercomp.jsx';
+import Review from './pages/UserCom/Review.jsx';
+import ViewReview from './pages/UserCom/ViewReview.jsx';
 const router = createBrowserRouter([
    {
       path:"/",
@@ -38,6 +42,23 @@ const router = createBrowserRouter([
    {
       path:"/about",
       element: <About/>
+   },
+   {
+      path:"/viewreview",
+      element:<ViewReview/>
+   },
+   { 
+      path:"/complaintform",
+      element:<ComplaintForm/>
+
+   },
+   {
+      path:"/user/review",
+      element:<Review/>
+   },
+   {
+      path:"/manager/complaint",
+      element:<Managercomp/>
    },
    {
       path:"/confirmeddetails",

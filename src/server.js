@@ -13,6 +13,8 @@ import nodemailer from 'nodemailer';
 //import path from 'path';
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
+import { v4 as uuidv4 } from 'uuid';
+
 
 //import jwt from 'jsonwebtoken';
 //import rateLimit from 'express-rate-limit';
@@ -118,17 +120,129 @@ const confirmedDetailsSchema = new mongoose.Schema({
   fromDate: Date,
   toDate: Date
 });
+const complaintsSchema = new mongoose.Schema({
+  complaintId: {
+    type: String,
+    unique: true,
+    default: uuidv4
+  },
+  userEmail: String,
+  guideEmail: String,
+  complaint: String,
+  locName: String
+});
+// const reviewSchema = new mongoose.Schema({
+//   guidePerformance: {
+//     knowledge: { type: Number, required: true },
+//     communication: { type: Number, required: true },
+//     engagement: { type: Number, required: true },
+//     friendliness: { type: Number, required: true },
+//     knowledgeDescription: { type: String, required: true },
+//     communicationDescription: { type: String, required: true },
+//     engagementDescription: { type: String, required: true },
+//     friendlinessDescription: { type: String, required: true }
+//   },
+//   locationExperience: {
+//     accessibility: { type: Number, required: true },
+//     cleanliness: { type: Number, required: true },
+//     safety: { type: Number, required: true },
+//     facilities: { type: Number, required: true },
+//     accessibilityDescription: { type: String, required: true },
+//     cleanlinessDescription: { type: String, required: true },
+//     safetyDescription: { type: String, required: true },
+//     facilitiesDescription: { type: String, required: true }
+//   },
+//   tourOrganization: {
+//     timing: { type: Number, required: true },
+//     itinerary: { type: Number, required: true },
+//     pace: { type: Number, required: true },
+//     timingDescription: { type: String, required: true },
+//     itineraryDescription: { type: String, required: true },
+//     paceDescription: { type: String, required: true }
+//   },
+//   valueForMoney: {
+//     pricing: { type: Number, required: true },
+//     overallSatisfaction: { type: Number, required: true },
+//     pricingDescription: { type: String, required: true },
+//     overallSatisfactionDescription: { type: String, required: true }
+//   },
+//   overallExperience: {
+//     enjoyment: { type: Number, required: true },
+//     memorability: { type: Number, required: true },
+//     enjoymentDescription: { type: String, required: true },
+//     memorabilityDescription: { type: String, required: true }
+//   }
+// });
 
+/**const reviewSchema = new mongoose.Schema({
+  guidePerformance: {
+    knowledge: { type: Number, required: true },
+    communication: { type: Number, required: true },
+    engagement: { type: Number, required: true },
+    friendliness: { type: Number, required: true },
+    knowledgeDescription: { type: String, required: true },
+    communicationDescription: { type: String, required: true },
+    engagementDescription: { type: String, required: true },
+    friendlinessDescription: { type: String, required: true },
+    rating: { type: Number, required: true }
+  },
+  locationExperience: {
+    accessibility: { type: Number, required: true },
+    cleanliness: { type: Number, required: true },
+    safety: { type: Number, required: true },
+    facilities: { type: Number, required: true },
+    accessibilityDescription: { type: String, required: true },
+    cleanlinessDescription: { type: String, required: true },
+    safetyDescription: { type: String, required: true },
+    facilitiesDescription: { type: String, required: true },
+    rating: { type: Number, required: true }
+  },
+  tourOrganization: {
+    timing: { type: Number, required: true },
+    itinerary: { type: Number, required: true },
+    pace: { type: Number, required: true },
+    timingDescription: { type: String, required: true },
+    itineraryDescription: { type: String, required: true },
+    paceDescription: { type: String, required: true },
+    rating: { type: Number, required: true }
+  },
+  valueForMoney: {
+    pricing: { type: Number, required: true },
+    overallSatisfaction: { type: Number, required: true },
+    pricingDescription: { type: String, required: true },
+    overallSatisfactionDescription: { type: String, required: true },
+    rating: { type: Number, required: true }
+  },
+  overallExperience: {
+    enjoyment: { type: Number, required: true },
+    memorability: { type: Number, required: true },
+    enjoymentDescription: { type: String, required: true },
+    memorabilityDescription: { type: String, required: true },
+    rating: { type: Number, required: true }
+  }
+});**/
 // Create model for confirmed tour plan details
+// Schema and Model
+const reviewSchema = new mongoose.Schema({
+  location: String,
+  rating: Number,
+  comment: String,
+});
+
+const Review = mongoose.model('Review', reviewSchema);
+
+
+
 const ConfirmedDetails = mongoose.model('ConfirmedDetails', confirmedDetailsSchema);
 const TourPlan = mongoose.model('TourPlan', tourPlanSchema);
 const TourRequirement = mongoose.model('TourRequirement', tourRequirementSchema);
 const Tour = mongoose.model('Tour', tourSchema);
 const User = mongoose.model('User', userSchema);
-
+const Complaint = mongoose.model('Complaint', complaintsSchema);
 
 const Mgr = mongoose.model('Mgr', MgrSchema);
 const Guide = mongoose.model('Guide', GuideSchema);
+//const Review = mongoose.model('Review', reviewSchema);
 //const Mgr = mongoose.model('Mgr', mgrSchema);
 
 // Middlewares
@@ -178,6 +292,42 @@ app.post('/guideupload', upload.fields([
   } catch (error) {
     console.error('Error uploading tour plan:', error);
     res.status(500).send("Internal Server Error");
+  }
+});
+// Routes
+app.get('/api/reviews', async (req, res) => {
+  try {
+    const reviews = await Review.find();
+    // Convert numeric ratings to star symbols
+    const reviewsWithStars = reviews.map(review => ({
+      ...review._doc,
+      rating: convertToStars(review.rating)
+    }));
+    res.json(reviewsWithStars);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// Function to convert numeric rating to star symbols
+function convertToStars(rating) {
+  const starRating = '⭐'.repeat(rating) + '☆'.repeat(5 - rating);
+  return starRating;
+}
+
+
+app.post('/api/reviews', async (req, res) => {
+  const review = new Review({
+    location: req.body.location,
+    rating: req.body.rating,
+    comment: req.body.comment,
+  });
+
+  try {
+    const newReview = await review.save();
+    res.status(201).json(newReview);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
   }
 });
 // Endpoint to fetch tour plan details based on user email
@@ -815,6 +965,75 @@ app.post('/reset-passwordguide', async (req, res) => {
     res.status(500).json({ success: false, message: 'Internal server error' });
   }
 });
+// Define route to handle POST requests to create a new complaint
+app.post('/complaints', async (req, res) => {
+  try {
+    // Extract complaint data from request body
+    
+    const { userEmail, guideEmail, complaint, locName } = req.body;
+    const com=await ConfirmedDetails.findOne({userEmail,guideEmail});
+    // Create new complaint document
+    if(com){
+      const newComplaint = new Complaint({
+        userEmail,
+        guideEmail,
+        complaint,
+        locName
+      });
+
+      // Save the new complaint to the database
+      const savedComplaint = await newComplaint.save();
+
+      // Respond with the saved complaint data
+      res.status(201).json(savedComplaint);
+    }  
+    else{
+        console.log("invalid");
+      }
+  } catch (error) {
+    // Handle errors
+    console.error("Error creating complaint:", error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+app.get('/viewcomplaints', async (req, res) => {
+  try {
+    // Fetch all complaints from the database
+    const allComplaints = await Complaint.find();
+    res.status(200).json(allComplaints);
+  } catch (error) {
+    console.error("Error fetching complaints:", error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+// Route to handle submission of reviews
+// app.post('/reviews', async (req, res) => {
+//   try {
+//     const { ratings } = req.body;
+//     const newReview = new Review(ratings);
+//     // Save the new review to the database
+//     const savedReview = await newReview.save();
+//     // Respond with the saved review data
+//     res.status(201).json(savedReview);
+//   } catch (error) {
+//     // Handle errors
+//     console.error('Error submitting review:', error);
+//     res.status(500).json({ error: 'Internal server error' });
+//   }
+// });
+/**app.post('/reviews', async (req, res) => {
+  const { ratings } = req.body;
+
+  try {
+    // Save ratings to the database
+    const newReview = new Review(ratings);
+    await newReview.save();
+    res.status(201).json({ success: true, message: 'Review submitted successfully', ratings });
+  } catch (error) {
+    console.error('Error submitting review:', error);
+    res.status(500).json({ success: false, message: 'Error submitting review. Please try again later.' });
+  }
+});**/
 // Start server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

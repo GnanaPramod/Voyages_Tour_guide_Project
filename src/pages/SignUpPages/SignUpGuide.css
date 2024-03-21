@@ -50,6 +50,13 @@
   .sign-up-gui button:hover {
     background-color: #1be11b;
   }
+  .gsb{
+    display: flex;
+    flex-direction: column;
+  }
+  .gsb1,.gsb2{
+    width:310px;
+  }
   
   .error {
     color: red;

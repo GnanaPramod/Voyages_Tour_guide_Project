@@ -8,7 +8,7 @@
   
   .signin-link {
     position: relative;
-    padding: 30px;
+    padding: 50px;
     background-color: #4e1e76;
     color: white;
     text-decoration: none;
@@ -16,6 +16,7 @@
     border-radius: 20px;
     margin: 0 auto; 
     transition: background-color 0.3s ease;
+    width:500px;
   }
   
   .signin-link:hover {
