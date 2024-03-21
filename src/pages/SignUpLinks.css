@@ -2,7 +2,7 @@
     margin-top: 200px;
     display: flex;
     flex-direction: column;
-    gap:10px;
+    gap:8px;
 
   }
   
@@ -18,6 +18,7 @@
     transition: background-color 0.3s ease;
     /* width: 180px; */
     margin: 0 auto;
+    width:500px;
   }
   
   .signup-link:hover {

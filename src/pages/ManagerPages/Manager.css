@@ -7,6 +7,8 @@
   
   /* Styling for user profile section */
   .manager-profile {
+    position:absolute;
+    height:100%;
     background-color: #f2f2f2; /* Light grey */
     padding: 20px;
     border-radius: 5px;
@@ -17,7 +19,9 @@
     color:rgb(103, 87, 8);
   }
   .manager-profile p {
-    margin: 5px 0; /* Adjust spacing */
+    margin: 5px 0;
+    position:relative; 
+    top:120px;/* Adjust spacing */
   }
   
   /* Styling for image */
@@ -26,18 +30,35 @@
     height: 100px; /* Adjust size as needed */
     border-radius: 50%; /* Make it circular */
     object-fit: cover; /* Ensure the photo fills the circle */
-    margin-bottom: 10px; /* Add space below the image */
+    margin-bottom: 10px; 
+    position:absolute;
+    left:80px;/* Add space below the image */
   }
   
   /* Styling for link */
   .manager-link {
-    position: fixed;
-    top: 10px;
-    left: 10px;
+    /* position: fixed; */
+    position:absolute;
+    top: 200px;
+    left: 150px;
     background-color: #25ede3; /* Green */
     border: none;
     color: white;
-    padding: 15px 32px;
+    padding: 90px 90px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .manager-com{
+    position:relative;
+    top: 290px;
+    left: 600px;
+    background-color: #25ede3; /* Green */
+    border: none;
+    color: white;
+    padding: 90px 90px;
     text-align: center;
     text-decoration: none;
     font-size: 16px;

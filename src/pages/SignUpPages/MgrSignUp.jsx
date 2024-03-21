@@ -83,10 +83,12 @@ function MgrSignUp() {
         <input type="file" name="profilePicture" onChange={handleFileChange} /><br/>
         <input type="text" name="mgrid" placeholder="Manager ID" value={formData.mgrid} onChange={handleChange} /><br/> {/* Manager ID field */}
        </div> 
-        <button type="submit">Sign Up</button>
-        <button type="button" onClick={handleSignInClick}>Sign In</button> {/* Changed to type="button" */}
+       <div className="mgs">
+        <button className="mgs1"type="submit">Sign Up</button>
+        <button className="mgs2"type="button" onClick={handleSignInClick}>Sign In</button> {/* Changed to type="button" */}
         {error && <div style={{ color: 'red' }}>{error}</div>}
         {successMessage && <div style={{ color: 'green' }}>{successMessage}</div>}
+       </div> 
       </form>
     </div>
   );

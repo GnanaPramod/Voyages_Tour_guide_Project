@@ -42,8 +42,11 @@ function MangrIntf() {
           </div>
         )}
       </div>
-    </div>  
+    </div> 
+    <div className="mrc"> 
       <Link to="/manager/upload" className="manager-link">Manager Upload</Link>
+      <Link to="/manager/complaint" className="manager-com">ViewComplaints</Link>
+    </div>
   </div>  
   );
 }

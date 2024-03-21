@@ -78,6 +78,15 @@ function Search() {
   function handleconfirmBtn(){
     navigate('/confirmeddetails');
   }
+  function handlecomplainBtn(){
+    navigate('/complaintform');
+  }
+  function handlereviewBtn(){
+    navigate('/user/review');
+  }
+  function handleViewReviewBtn(){
+    navigate('/viewreview');
+  }
   return (
     <div>
       <div className="user-profile">
@@ -97,11 +106,15 @@ function Search() {
           </div>
         )}
       </div>
-
+     <div className="butor">
       <button className="u1" onClick={handleBtn}>Search Locations</button>
       <button className="u2" onClick={handlePlnBtn}>Get Plan Details</button>
       <button className="u3" onClick={handleTourBtn}>Get Guide</button>
       <button className="u4" onClick={handleconfirmBtn}>Confirmed Tour Details</button>
+      <button className="u5" onClick={handlecomplainBtn}>Complain</button>
+      <button className="u6" onClick={handlereviewBtn}>GiveReview</button>
+      <button className="u7" onClick={handleViewReviewBtn}>View Review</button>
+    </div>
     </div>
   );
 }
