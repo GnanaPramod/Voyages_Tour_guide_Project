@@ -1,0 +1,99 @@
+#give-review {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  #give-review h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  #give-review form {
+    position:absolute;
+    width:500px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #give-review label {
+    margin-bottom: 10px;
+  }
+  
+  #give-review input[type="text"],
+  #give-review textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  #give-review button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #give-review button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Styling for star rating */
+  .star-rating {
+    display: inline-block;
+    font-size: 25px;
+  }
+  
+  .star-rating span {
+    color: gray;
+    cursor: pointer;
+  }
+  
+  .star-rating span:hover,
+  .star-rating span:hover ~ span {
+    color: orange;
+  }
+  #locname1{
+    position:absolute;
+    width:500px;
+    left:500px;
+  }
+  #userEmail1{
+    position:relative;
+    width:500px;
+    left:500px;
+    top:120px;
+  }
+  #rating1{
+    position:relative;
+    width:500px;
+    left:500px;
+    top:120px;
+  }
+  #comment1{
+    position:relative;
+    width:500px;
+    left:500px;
+    top:160px;
+  }
+  #sbmt1{
+    position:relative;
+    width:200px;
+    height:60px;
+    left:647px;
+    top:180px;
+    background-color: aqua;
+    border-radius: 30px;
+    margin: 0;
+    border:none /* Remove margin */
+  }
+  #txt1{
+    width:500px;
+    height:160px;
+  }
+  

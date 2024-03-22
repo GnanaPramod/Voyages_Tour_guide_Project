@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import img2 from './tourimages/img2.jpg';
+//import img2 from './tourimages/img2.jpg';
 import { useNavigate } from 'react-router-dom';
 const UserReq = () => {
   const navigate = useNavigate();
@@ -38,11 +38,10 @@ const UserReq = () => {
 
   return (
     <div>
-      <img id = "backimg" src = {img2} alt = ""/>
+      
       <div id = "heading">   User Requirements </div><br/><br/><br/><br/>
       <form id= "usr-req" onSubmit={handleSubmit}>
-        <label>User Id</label><br/>
-        <input id = "usrid" type = "number" name = "userid" placeholder='User Id' value= {formData.userid} onChange={handleChange} required /><br/><br/>
+        
         <label>User Name</label><br/>
         <input type="text" name="username" placeholder="Username" value={formData.username} onChange={handleChange} required /><br/><br/>
         <label>User Mobile Number</label><br/>
@@ -68,3 +67,5 @@ const UserReq = () => {
 };
 
 export default UserReq;
+/**<label>User Id</label><br/>
+        <input id = "usrid" type = "number" name = "userid" placeholder='User Id' value= {formData.userid} onChange={handleChange} required /><br/><br/>**/

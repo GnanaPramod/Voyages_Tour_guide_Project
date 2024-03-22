@@ -1,0 +1,44 @@
+#header2{
+    position:absolute;
+    left:600px;
+}
+#userEmail2{
+    position:absolute;
+    width:500px;
+    left:500px;
+    top:60px;
+}
+#guideEmail2{
+    position:relative;
+    width:500px;
+    left:500px;
+    top:150px;
+}
+#locname2{
+    position:relative;
+    width:500px;
+    left:500px;
+    top:150px;
+}
+#complaint{
+    position:relative;
+    width:500px;
+    left:500px;
+    top:150px;
+
+}
+#sbmt2{
+    position:relative;
+    width:200px;
+    height:60px;
+    left:646px;
+    top:140px;
+    background-color: aqua;
+    border-radius: 30px;
+    margin: 0;
+    border:none /* Remove margin */
+}
+#txt2{
+    width:500px;
+    height:160px;
+}
