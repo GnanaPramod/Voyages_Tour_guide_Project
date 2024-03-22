@@ -15,6 +15,7 @@
 .user-details {
   position:absolute;
   right:10px;
+  width:350px;
   height:100%;
   display: flex;
   align-items: center;
@@ -26,7 +27,7 @@
 
 .user-photo img {
   position:absolute;
-  left: 80px;
+  left: 110px;
   top:190px;
   width: 100px; /* Adjust size as needed */
   height: 100px; /* Adjust size as needed */
@@ -42,12 +43,13 @@
 }
 .user-info p {
   position:relative;
+  left:70px;
   top:0px;
   margin:5px 0;
 }
 .user-info h2{
   position:absolute;
-  left:50px;
+  left:80px;
   top:140px;
   color: #af7a4c; /* Green */
   margin-bottom: 10px; /* Adjust spacing */
@@ -88,7 +90,7 @@
 .u1, .u2, .u3 {
   position:relative;
   top:12px;
-  left:10px;
+  left:100px;
   border: none;
   background-color: #7fc1e7;
   color: white;
@@ -106,8 +108,9 @@
 
  .u4, .u5, .u6,.u7 {
   position:relative;
-  bottom:633px;
-  left:500px;
+  bottom:632px;
+  
+  left:600px;
   background-color: #7fc1e7;
   border: none;
   color: white;
@@ -120,7 +123,7 @@
   cursor: pointer;
   border-radius: 5px;
   width: 400px; /* Set the width of each button */
-  height: 50%; /* Set the height of each button */
+  height: 400px; /* Set the height of each button */
   box-sizing: border-box;
 }
 

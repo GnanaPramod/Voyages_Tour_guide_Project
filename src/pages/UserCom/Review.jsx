@@ -130,9 +130,11 @@ function Review() {
 export default Review;**/
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import './Review.css';
+import { useNavigate } from 'react-router-dom';
 function StarRating({ rating, onRatingChange }) {
   const stars = [1, 2, 3, 4, 5];
+  
   return (
     <div>
       {stars.map((star, index) => (
@@ -151,9 +153,10 @@ function StarRating({ rating, onRatingChange }) {
 function Review() {
   const [reviews, setReviews] = useState([]);
   const [location, setLocation] = useState('');
+  const [userEmail, setUserEmail] = useState('');
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
-
+  const navigate = useNavigate();
   useEffect(() => {
     axios.get('http://localhost:5000/api/reviews')
       .then(response => {
@@ -166,6 +169,7 @@ function Review() {
     e.preventDefault();
     const newReview = {
       location,
+      userEmail,
       rating,
       comment,
     };
@@ -173,29 +177,35 @@ function Review() {
       .then(response => {
         setReviews([...reviews, response.data]);
         setLocation('');
+        setUserEmail('');
         setRating(0);
         setComment('');
       })
       .catch(error => console.log(error));
+      navigate('/tourpage/success');
   };
 
   return (
-    <div className="App">
+    <div id= "give review">
       <h1>Tour Reviews</h1>
       <form onSubmit={handleSubmit}>
-        <label>
-          Location:
-          <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} required />
+        <label id = "locname1">
+          Location:<br/><br/>
+          <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} required /><br/>
         </label>
-        <label>
-          Rating:
+        <label id = "userEmail1">
+          UserEmail:<br/><br/>
+          <input type="text" value={userEmail} onChange={(e) => setUserEmail(e.target.value)} required /><br/>
+        </label><br/>
+        <label id = "rating1">
+          Rating:<br/><br/>
           <StarRating rating={rating} onRatingChange={setRating} />
         </label>
-        <label>
-          Comment:
-          <textarea value={comment} onChange={(e) => setComment(e.target.value)} required />
+        <label id = "comment1">
+          Comment:<br/><br/>
+          <textarea id = "txt1" value={comment} onChange={(e) => setComment(e.target.value)} required />
         </label>
-        <button type="submit">Submit Review</button>
+        <button id = "sbmt1" type="submit">Submit Review</button>
       </form>
       
     </div>

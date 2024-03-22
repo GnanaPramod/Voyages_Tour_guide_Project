@@ -85,7 +85,7 @@ const tourSchema = new mongoose.Schema({
   images: [String] // Array of image filenames
 });
 const tourRequirementSchema = new mongoose.Schema({
-  userid: { type: Number, required: true },
+  
   username: { type: String, required: true },
   usrphno: { type: Number, required: true },
   email: { type: String, required: true },
@@ -225,6 +225,7 @@ const complaintsSchema = new mongoose.Schema({
 // Schema and Model
 const reviewSchema = new mongoose.Schema({
   location: String,
+  userEmail:String,
   rating: Number,
   comment: String,
 });
@@ -317,18 +318,27 @@ function convertToStars(rating) {
 
 
 app.post('/api/reviews', async (req, res) => {
-  const review = new Review({
-    location: req.body.location,
-    rating: req.body.rating,
-    comment: req.body.comment,
-  });
-
-  try {
-    const newReview = await review.save();
-    res.status(201).json(newReview);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
+  const {userEmail} =req.body;
+  const user = User.findOne({email: userEmail});
+  if(user){
+      const review = new Review({
+        location: req.body.location,
+        userEmail: req.body.userEmail,
+        rating: req.body.rating,
+        comment: req.body.comment,
+      });
+  
+      try {
+        const newReview = await review.save();
+        res.status(201).json(newReview);
+      } catch (err) {
+        res.status(400).json({ message: err.message });
+      }
   }
+  else{
+    console.log("invalid credentials");
+  }
+  
 });
 // Endpoint to fetch tour plan details based on user email
 app.get('/fetchTourPlan/:userEmail', async (req, res) => {
@@ -826,7 +836,7 @@ app.get('/tours', async (req, res) => {
 app.post('/tourpage', async (req, res) => {
   try {
     const {
-      userid,
+      
       username,
       usrphno,
       email,
@@ -839,7 +849,7 @@ app.post('/tourpage', async (req, res) => {
     } = req.body;
 
     const tourRequirement = new TourRequirement({
-      userid,
+      
       username,
       usrphno,
       email,

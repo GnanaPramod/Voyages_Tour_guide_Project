@@ -1,0 +1,89 @@
+/* ViewReview.css */
+/**
+#head1 {
+    margin-bottom: 20px; 
+    padding: 20px;
+    border: 2px solid #ccc; 
+    border-radius: 8px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+  
+    
+    background-color: #f9f9f9;
+  }
+  
+  #head1 h1 {
+    font-size: 24px;
+    color: #333;
+  }
+  
+  #head1 ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  #head1 li {
+    margin-bottom: 15px;
+  }
+  
+  #head1 strong {
+    font-weight: bold;
+    color: #666;
+  }
+  
+  
+  .StarRating {
+  }**/
+  /* ViewReview.css */
+  
+  
+
+  
+#head1 {
+    
+    margin-bottom: 20px; /* Add space below each component */
+    padding: 20px;
+    border: 2px solid #ccc; /* Add border for visual separation */
+    border-radius: 8px; /* Add border radius for rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow for depth */
+    
+    /* Add some additional styling for better readability */
+    background-color: #f9f9f9;
+  }
+
+  #head1:not(:first-child) {
+    margin-top: 20px; /* Add margin-top between each .head1 element */
+  }
+  
+  #head1 h1 {
+    font-size: 24px;
+    color: #333;
+  }
+  
+  #head1 ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  #head1 li {
+    margin-bottom: 15px;
+  }
+  
+  #head1 strong {
+    font-weight: bold;
+    color: #666;
+  }
+  
+  #search1 {
+    position: absolute;
+    width: 500px;
+    left: 50%;
+    top: 90px;
+    transform: translate(-50%, -50%);
+  }
+  
+  /* Styling for StarRating component */
+  .StarRating {
+    /* Add your styling for the star rating component here */
+  }
+  
+  

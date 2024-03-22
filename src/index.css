@@ -71,14 +71,22 @@ code {
   right:270px;
   text-decoration: none;
 }
+#review{
+  color:white;
+  position:absolute;
+  top:35px;
+  font-size:20px;
+  right:170px;
+  text-decoration: none;
+}
 #plcs{
   position:relative;
   width: 320px;
   height:340px;
   top:300px;
-  left:30px;
+  left:5px;
   flex:20px;
-  padding:12px;
+  padding:6px;
   margin:25px;
   border-radius: 10px;
   border-color: white;
