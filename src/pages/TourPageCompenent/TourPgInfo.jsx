@@ -47,6 +47,7 @@ export default TourPgInfo;**/
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Places from '../../components/Places.jsx';
+import Footer from '../../components/Footer.jsx';
 import './TourPgInfo.css';
 
 function TourPgInfo() {
@@ -97,6 +98,7 @@ function TourPgInfo() {
           </div>
         ))}
       </div>
+      <Footer />
     </div>
   );
 }
