@@ -229,9 +229,16 @@ const reviewSchema = new mongoose.Schema({
   rating: Number,
   comment: String,
 });
+const messageSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  subject: String,
+  message: String,
+ 
+});
 
 const Review = mongoose.model('Review', reviewSchema);
-
+const Message = mongoose.model('Message', messageSchema);
 
 
 const ConfirmedDetails = mongoose.model('ConfirmedDetails', confirmedDetailsSchema);
@@ -1013,6 +1020,17 @@ app.get('/viewcomplaints', async (req, res) => {
     res.status(200).json(allComplaints);
   } catch (error) {
     console.error("Error fetching complaints:", error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+app.post('/api/messages', async (req, res) => {
+  try {
+    const { name, email, subject, message } = req.body;
+    const newMessage = new Message({ name, email, subject, message });
+    await newMessage.save();
+    res.status(201).json({ message: 'Message sent successfully' });
+  } catch (error) {
+    console.error('Error sending message:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });

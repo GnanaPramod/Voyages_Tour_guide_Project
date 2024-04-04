@@ -1,0 +1,81 @@
+/* ContactPage.css */
+
+.contact-page-container {
+    display: flex;
+    flex-direction: column; /* Ensure content stacks vertically */
+    align-items: center; /* Center content horizontally */
+    padding: 50px;
+  }
+  
+  .contact-info,
+  .contact-form {
+    width: 100%;
+    max-width: 600px; /* Limit width for better readability */
+  }
+  
+  .contact-info {
+    margin-bottom: 50px; /* Add space between sections */
+  }
+  
+  .contact-info h2,
+  .contact-form h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+  
+  .info-items {
+    margin-bottom: 20px;
+  }
+  
+  .info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .info-item i {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+  
+  .social-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .social-links a {
+    color: #007bff;
+    font-size: 24px;
+  }
+  
+  .social-links a:hover {
+    color: #0056b3;
+  }
+  
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .contact-form textarea {
+    height: 150px;
+  }
+  
+  .contact-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .contact-form button:hover {
+    background-color: #0056b3;
+  }
+  
